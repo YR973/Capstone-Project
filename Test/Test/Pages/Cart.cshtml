@@ -1,0 +1,77 @@
+﻿@page
+@model Test.Pages.Cart
+
+@{
+    Layout = "Shared/HeaderPartial";
+	int totalItems = 0;
+	float totalCost = 0;
+	foreach (var item in Model.CartDict)
+	{
+		var product = Model.Products.FirstOrDefault(p => p.ProductID == item.Key);
+		if (product != null)
+		{
+			totalItems += item.Value;
+			totalCost += item.Value * product.Price;
+		}
+	}
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Cart</title>
+</head>
+<body>
+<div class="container">
+		<main>
+			<h2>Shopping Cart</h2>
+			<div class="cart-page">
+				<div class="cart-items">					
+					<table>
+						<thead>
+							<tr>
+								<th colspan="3">Cart Items</th>
+							</tr>
+						</thead>
+					<tbody>
+					@foreach(var product in Model.Products)
+					{
+						<tr>
+							<td style="width: 20%;"><img src="img/img/products/@(product.ProductID).jpg"></td>
+							<td style="width: 60%;">
+								<h2>@product.Name</h2>
+								<p>@product.Description</p>
+								<br>
+								<h3>Price: @product.Price $</h3>
+								<br>
+								<form method="post" asp-page-handler="RemoveFromCart" asp-route-id="@product.ProductID">
+                                    <input type="submit" value="Remove">
+                                </form>
+							</td>
+							<td class="qty" style="width: 15%;">
+								<div>@Model.CartDict[product.ProductID]</div>
+								<br><br>
+								<h3>@(Model.CartDict[product.ProductID] * product.Price) $</h3>
+							</td>
+						</tr>
+					}
+					</tbody>
+					</table>
+				</div>
+				<div class="cart-summary">
+					<div class="checkout-total">
+						<h3>Cart Summary</h3>
+						<ul>
+							<li>Number of items: @totalItems</li>
+                            <hr>
+                            <li>Cart Total: <span style="float: right;">@totalCost $</span></li>
+							<li><a href="checkout.html">Go to Checkout</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>		
+		</main> <!-- Main Area -->
+	</div>
+</body>
+</html>
