@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\yfroo\\RiderProjects\\Test\\Test\\Test.csproj": {}
+    "C:\\Users\\yfroo\\Documents\\GitHub\\hello\\Capstone-Project\\Test\\Test\\Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\yfroo\\RiderProjects\\Test\\Test\\Test.csproj": {
+    "C:\\Users\\yfroo\\Documents\\GitHub\\hello\\Capstone-Project\\Test\\Test\\Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yfroo\\RiderProjects\\Test\\Test\\Test.csproj",
+        "projectUniqueName": "C:\\Users\\yfroo\\Documents\\GitHub\\hello\\Capstone-Project\\Test\\Test\\Test.csproj",
         "projectName": "Test",
-        "projectPath": "C:\\Users\\yfroo\\RiderProjects\\Test\\Test\\Test.csproj",
+        "projectPath": "C:\\Users\\yfroo\\Documents\\GitHub\\hello\\Capstone-Project\\Test\\Test\\Test.csproj",
         "packagesPath": "C:\\Users\\yfroo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yfroo\\RiderProjects\\Test\\Test\\obj\\",
+        "outputPath": "C:\\Users\\yfroo\\Documents\\GitHub\\hello\\Capstone-Project\\Test\\Test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\yfroo\\AppData\\Roaming\\NuGet\\NuGet.Config"
