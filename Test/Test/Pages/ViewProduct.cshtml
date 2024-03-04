@@ -1,0 +1,62 @@
+﻿@page
+@model Test.Pages.ViewProductModel
+
+@{
+    Layout = "HeaderPartial";
+	string alt = Model.Product.Name + "\t" + Model.Product.Description;
+}
+
+<div class="product-view">
+   
+    @if (@Model.Product != null)
+        {
+            <div class="container">
+		<main>
+		<div class="single-product">
+			<div class="images-section">
+				<div class="larg-img">
+					<img src="img/products/@(Model.Product.ProductID).jpg"
+					     alt="@alt">
+				</div>
+			</div> <!-- End of Images Section-->
+
+			<div class="product-detail">
+				<div class="product-name">
+					<h2>@Model.Product.Name</h2>
+				</div>
+				<div class="product-price">
+					<h3>@Model.Product.Price $</h3>
+				</div>
+				<hr>
+				<div class="product-description">
+					<p>@Model.Product.Description</p>
+				</div>
+				<hr>
+				<div class="product-cart">
+					<form id="cart-form" method="post" asp-page-handler="AddToCart" asp-route-id="@Model.Product.ProductID">
+                        <div class="form-group">
+                            <input type="number" 
+                                   class="cart-number" 
+                                   name="quantity" 
+                                   value="1"
+                                   min="1"
+                                   max="10">
+                            <input type="submit" 
+                                   name="addToCart" 
+                                   value="Add To Cart">
+                        </div>
+                    </form>
+				</div>
+				<hr>
+				<div class="product-meta">
+					<p><b>Category: </b> Product</p>
+				</div>
+			</div> <!-- End of Product Detail-->
+		</div>
+		</main>
+		</div>
+        } else
+        {
+            <p>Product not found</p>
+        }
+</div>

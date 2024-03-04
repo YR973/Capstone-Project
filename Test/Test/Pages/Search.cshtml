@@ -1,0 +1,20 @@
+﻿@page "/Search"
+@model Test.Pages.Search
+
+@{
+    Layout = null;
+    string a = ViewData["Query"] as string;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+    <h1>@a</h1>
+</div>
+</body>
+</html>

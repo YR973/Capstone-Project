@@ -1,0 +1,41 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    Layout = "Shared/HeaderPartial";
+}
+<!DOCTYPE html>
+
+<html>
+<body>
+<div>
+	<main>
+		<div class="container">
+			<div class="new-product-section">
+				<div class="product-section-heading">
+					<h2>Featured Products</h2>
+					<h3>!!!</h3>
+				</div>
+				<div class="product-content">
+					@foreach (var product in Model.Products)
+					{
+						//display products
+						<div class="product">
+							<a asp-page="/ViewProduct" asp-route-id="@product.ProductID">
+								<img src="img/products/@(product.ProductID).jpg">
+							</a>
+							<div class="product-detail">
+								<h3>Placeholder</h3>
+								<h2>@product.Name</h2>
+								<a asp-page="/ViewProduct" asp-route-id="@product.ProductID">View product</a>
+								<p>@product.Price $</p>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</main>
+</div>
+</body>
+</html>

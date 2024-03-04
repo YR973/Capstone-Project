@@ -1,0 +1,38 @@
+﻿@page "/login"
+@model Test.Pages.LogIn
+@{
+    Layout = "Shared/HeaderPartial";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Log In</title>
+</head>
+<body>
+<div class="container">
+    <main>
+        <div class="contact">
+            <h2 class="heading">Log In</h2>
+            <form class="checkout-form" method="post" asp-route-email="email" asp-route-password="password">
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input type="text" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" name="password">
+                </div>
+                <div class="form-group">
+                    <label></label>
+                    <input type="submit" id="loginbutton" name="loginbutton" value="Send">
+                </div>
+                <div>New User? <a asp-page="/signup">Register</a></div>
+            </form>
+            
+        </div>
+    </main> 
+</div>
+</body>
+</html>
