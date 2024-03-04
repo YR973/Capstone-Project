@@ -9,71 +9,75 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Test
 build_property.RootNamespace = Test
-build_property.ProjectDir = C:\Users\yfroo\RiderProjects\Test\Test\
+build_property.ProjectDir = C:\Users\yfroo\Documents\GitHub\hello\Capstone-Project\Test\Test\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\yfroo\RiderProjects\Test\Test
+build_property.MSBuildProjectDirectory = C:\Users\yfroo\Documents\GitHub\hello\Capstone-Project\Test\Test
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/yfroo/RiderProjects/Test/Test/Pages/Account.cshtml]
+[C:/Users/yfroo/Documents/GitHub/hello/Capstone-Project/Test/Test/Pages/Account.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yfroo/RiderProjects/Test/Test/Pages/Cart.cshtml]
+[C:/Users/yfroo/Documents/GitHub/hello/Capstone-Project/Test/Test/Pages/Cart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yfroo/RiderProjects/Test/Test/Pages/Checkout.cshtml]
+[C:/Users/yfroo/Documents/GitHub/hello/Capstone-Project/Test/Test/Pages/Checkout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2hlY2tvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yfroo/RiderProjects/Test/Test/Pages/Error.cshtml]
+[C:/Users/yfroo/Documents/GitHub/hello/Capstone-Project/Test/Test/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yfroo/RiderProjects/Test/Test/Pages/Index.cshtml]
+[C:/Users/yfroo/Documents/GitHub/hello/Capstone-Project/Test/Test/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yfroo/RiderProjects/Test/Test/Pages/LogIn.cshtml]
+[C:/Users/yfroo/Documents/GitHub/hello/Capstone-Project/Test/Test/Pages/LogIn.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nSW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yfroo/RiderProjects/Test/Test/Pages/Privacy.cshtml]
+[C:/Users/yfroo/Documents/GitHub/hello/Capstone-Project/Test/Test/Pages/Orders.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JkZXJzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yfroo/Documents/GitHub/hello/Capstone-Project/Test/Test/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yfroo/RiderProjects/Test/Test/Pages/Search.cshtml]
+[C:/Users/yfroo/Documents/GitHub/hello/Capstone-Project/Test/Test/Pages/Search.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VhcmNoLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yfroo/RiderProjects/Test/Test/Pages/Shared/HeaderPartial.cshtml]
+[C:/Users/yfroo/Documents/GitHub/hello/Capstone-Project/Test/Test/Pages/Shared/HeaderPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXEhlYWRlclBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yfroo/RiderProjects/Test/Test/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/yfroo/Documents/GitHub/hello/Capstone-Project/Test/Test/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yfroo/RiderProjects/Test/Test/Pages/SignUp.cshtml]
+[C:/Users/yfroo/Documents/GitHub/hello/Capstone-Project/Test/Test/Pages/SignUp.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2lnblVwLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yfroo/RiderProjects/Test/Test/Pages/ViewProduct.cshtml]
+[C:/Users/yfroo/Documents/GitHub/hello/Capstone-Project/Test/Test/Pages/ViewProduct.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmlld1Byb2R1Y3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yfroo/RiderProjects/Test/Test/Pages/_ViewImports.cshtml]
+[C:/Users/yfroo/Documents/GitHub/hello/Capstone-Project/Test/Test/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yfroo/RiderProjects/Test/Test/Pages/_ViewStart.cshtml]
+[C:/Users/yfroo/Documents/GitHub/hello/Capstone-Project/Test/Test/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/yfroo/RiderProjects/Test/Test/Pages/Shared/_Layout.cshtml]
+[C:/Users/yfroo/Documents/GitHub/hello/Capstone-Project/Test/Test/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-awok0ovgmp

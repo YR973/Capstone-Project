@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZkPBkrvsKFbBgIr1mCfmmIIiX/kE/rK0zpKRHEJdLAUmUHz0lRKnpt9ekj7udmliIqnrUgJVv4ZVV0a4VWCDTw==",
+  "dgSpecHash": "843GHmLNoLPdtAbon3PGh9tw+l/jX4F7+T+0ifWnurHrzxWew8Hfg1eeLAcX868to0AMqR9NzY34HWqCQhXdvA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\yfroo\\RiderProjects\\Test\\Test\\Test.csproj",
+  "projectFilePath": "C:\\Users\\yfroo\\Documents\\GitHub\\hello\\Capstone-Project\\Test\\Test\\Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\yfroo\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\yfroo\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
