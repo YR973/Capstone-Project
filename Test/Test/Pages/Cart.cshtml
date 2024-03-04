@@ -5,6 +5,7 @@
     Layout = "Shared/HeaderPartial";
 	int totalItems = 0;
 	float totalCost = 0;
+	//loop through the cart dictionary and calculate the total items and cost
 	foreach (var item in Model.CartDict)
 	{
 		var product = Model.Products.FirstOrDefault(p => p.ProductID == item.Key);
@@ -71,7 +72,7 @@
 					</div>
 				</div>
 			</div>		
-		</main> <!-- Main Area -->
+		</main> 
 	</div>
 </body>
 </html>

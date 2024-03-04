@@ -4,7 +4,7 @@
     <title>My Store</title>
     <link href="css/style.css" rel="stylesheet" />
 </head>
-<body>
+
 <header>
     <div class="container">
         <div class="brand">
@@ -19,7 +19,7 @@
             </div> <!-- logo -->
             <div class="shop-icon">
                 <div>
-                    <a asp-page="">
+                    <a asp-page="LogIn">
                     <img src="img/img/icons/account.png">
                     </a>
                 </div>
@@ -52,8 +52,69 @@
         </div> <!-- menu -->
     </div> <!-- container -->
 </header> <!-- header -->
+<body>
 <main>
-    @RenderBody()
+	@RenderBody()
 </main>
 </body>
+<footer>
+    <div class="container">
+    			<div class="footer-widget">
+    				<div class="widget">
+    					<div class="widget-heading">
+    						<h3>Important Link</h3>
+    					</div>
+    					<div class="widget-content">
+    						<ul>
+    							<li><a asp-page="Index">About</a></li>
+    							<li><a asp-page="Index">Contact</a></li>
+    							<li><a asp-page="Index">Refund Policy</a></li>
+    							<li><a asp-page="Index">Terms & Conditions</a></li>
+    						</ul>
+    					</div>
+    				</div>
+    				<div class="widget">
+    					<div class="widget-heading">
+    						<h3>Information</h3>
+    					</div>
+    					<div class="widget-content">
+    						<ul>
+    							<li><a asp-page="LogIn">My Account</a></li>
+    							<li><a asp-page="Index">My Orders</a></li>
+    							<li><a asp-page="Index">Cart</a></li>
+    							<li><a asp-page="Index">Checkout</a></li>
+    						</ul>
+    					</div>
+    				</div>
+    				<div class="widget">
+    					<div class="widget-heading">
+    						<h3>Follow us</h3>
+    					</div>
+    					<div class="widget-content">
+    						<div class="follow">
+    							<ul>
+    								<li><a asp-page="Index"><img src="img/icons/facebook.png"></a></li>
+    								<li><a asp-page="Index"><img src="img/icons/twitter.png"></a></li>
+    								<li><a asp-page="Index"><img src="img/icons/instagram.png"></a></li>
+    							</ul>
+    						</div>						
+    					</div>
+    					<div class="widget-heading">
+    						<h3>Subscribe for Newsletter</h3>
+    					</div>
+    					<div class="widget-content">
+    						<div class="subscribe">
+    							<form>
+    								<div class="form-group">
+    									<input type="text" class="form-control" name="subscribe" placeholder="Email">
+    									<img src="img/icons/paper_plane.png">
+    								</div>
+    							</form>
+    						</div>						
+    					</div>
+    				</div>
+    			</div> <!-- Footer Widget -->
+    		</div>
+</footer>
+
 </html>

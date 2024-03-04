@@ -21,8 +21,11 @@ public class IndexModel : PageModel
         _logger = logger;
         _context = context;
     }
+    
+    //list of products
     public List<Product> Products { get; set; }
 
+    //get the first 8 products
     public async Task OnGetAsync()
     {
         Products = await _context.Product.Take(8).ToListAsync();

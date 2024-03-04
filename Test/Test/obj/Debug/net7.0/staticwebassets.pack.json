@@ -17,6 +17,58 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\yfroo\\RiderProjects\\Test\\Test\\wwwroot\\fonts\\Roboto\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\fonts\\Roboto\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\yfroo\\RiderProjects\\Test\\Test\\wwwroot\\fonts\\Roboto\\Roboto-Black.ttf",
+      "PackagePath": "staticwebassets\\fonts\\Roboto\\Roboto-Black.ttf"
+    },
+    {
+      "Id": "C:\\Users\\yfroo\\RiderProjects\\Test\\Test\\wwwroot\\fonts\\Roboto\\Roboto-BlackItalic.ttf",
+      "PackagePath": "staticwebassets\\fonts\\Roboto\\Roboto-BlackItalic.ttf"
+    },
+    {
+      "Id": "C:\\Users\\yfroo\\RiderProjects\\Test\\Test\\wwwroot\\fonts\\Roboto\\Roboto-Bold.ttf",
+      "PackagePath": "staticwebassets\\fonts\\Roboto\\Roboto-Bold.ttf"
+    },
+    {
+      "Id": "C:\\Users\\yfroo\\RiderProjects\\Test\\Test\\wwwroot\\fonts\\Roboto\\Roboto-BoldItalic.ttf",
+      "PackagePath": "staticwebassets\\fonts\\Roboto\\Roboto-BoldItalic.ttf"
+    },
+    {
+      "Id": "C:\\Users\\yfroo\\RiderProjects\\Test\\Test\\wwwroot\\fonts\\Roboto\\Roboto-Italic.ttf",
+      "PackagePath": "staticwebassets\\fonts\\Roboto\\Roboto-Italic.ttf"
+    },
+    {
+      "Id": "C:\\Users\\yfroo\\RiderProjects\\Test\\Test\\wwwroot\\fonts\\Roboto\\Roboto-Light.ttf",
+      "PackagePath": "staticwebassets\\fonts\\Roboto\\Roboto-Light.ttf"
+    },
+    {
+      "Id": "C:\\Users\\yfroo\\RiderProjects\\Test\\Test\\wwwroot\\fonts\\Roboto\\Roboto-LightItalic.ttf",
+      "PackagePath": "staticwebassets\\fonts\\Roboto\\Roboto-LightItalic.ttf"
+    },
+    {
+      "Id": "C:\\Users\\yfroo\\RiderProjects\\Test\\Test\\wwwroot\\fonts\\Roboto\\Roboto-Medium.ttf",
+      "PackagePath": "staticwebassets\\fonts\\Roboto\\Roboto-Medium.ttf"
+    },
+    {
+      "Id": "C:\\Users\\yfroo\\RiderProjects\\Test\\Test\\wwwroot\\fonts\\Roboto\\Roboto-MediumItalic.ttf",
+      "PackagePath": "staticwebassets\\fonts\\Roboto\\Roboto-MediumItalic.ttf"
+    },
+    {
+      "Id": "C:\\Users\\yfroo\\RiderProjects\\Test\\Test\\wwwroot\\fonts\\Roboto\\Roboto-Regular.ttf",
+      "PackagePath": "staticwebassets\\fonts\\Roboto\\Roboto-Regular.ttf"
+    },
+    {
+      "Id": "C:\\Users\\yfroo\\RiderProjects\\Test\\Test\\wwwroot\\fonts\\Roboto\\Roboto-Thin.ttf",
+      "PackagePath": "staticwebassets\\fonts\\Roboto\\Roboto-Thin.ttf"
+    },
+    {
+      "Id": "C:\\Users\\yfroo\\RiderProjects\\Test\\Test\\wwwroot\\fonts\\Roboto\\Roboto-ThinItalic.ttf",
+      "PackagePath": "staticwebassets\\fonts\\Roboto\\Roboto-ThinItalic.ttf"
+    },
+    {
       "Id": "C:\\Users\\yfroo\\RiderProjects\\Test\\Test\\wwwroot\\img\\img\\icons\\account.png",
       "PackagePath": "staticwebassets\\img\\img\\icons\\account.png"
     },
