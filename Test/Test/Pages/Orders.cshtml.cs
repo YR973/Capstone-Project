@@ -3,6 +3,7 @@ using Test.Models;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Test.Pages
 {
@@ -19,17 +20,22 @@ namespace Test.Pages
         public List<Order> Order { get; set; }
         public User CurrentUser { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             if (HttpContext.Session.GetString("User") == null)
             {
-                Response.Redirect("/LogIn");
+                return Redirect("/LogIn");
             }
-            else
+            
+            
+            CurrentUser = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("User"));
+            HttpContext.Session.SetString("User", JsonConvert.SerializeObject(CurrentUser));
+            Order = await _orderContext.Order.Where(o => o.UserId == CurrentUser.UserID).ToListAsync();
+            if (Order==null)
             {
-                CurrentUser = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("User"));
-                Order = await _orderContext.Order.Where(o => o.UserId == CurrentUser.UserID).ToListAsync();
+                return Redirect("/Error");
             }
+            return null;
         }
     }
 }

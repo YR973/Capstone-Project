@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7pUUiORMw+hWgw71gh+UeuJtEuymVDAqRQgZF1FR3rQ=",
+  "Hash": "NBcq/Sip5y39hq+MkI6EQJmTlFuVGgDjdBKqD58bBCw=",
   "Source": "Test",
   "BasePath": "_content/Test",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\yfroo\\Documents\\GitHub\\hello\\Capstone-Project\\Test\\Test\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Test.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\yfroo\\Documents\\GitHub\\hello\\Capstone-Project\\Test\\Test\\wwwroot\\css\\admin.css",
+      "SourceId": "Test",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\yfroo\\Documents\\GitHub\\hello\\Capstone-Project\\Test\\Test\\wwwroot\\",
+      "BasePath": "_content/Test",
+      "RelativePath": "css/admin.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\admin.css"
     },
     {
       "Identity": "C:\\Users\\yfroo\\Documents\\GitHub\\hello\\Capstone-Project\\Test\\Test\\wwwroot\\css\\site.css",

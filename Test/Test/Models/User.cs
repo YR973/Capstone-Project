@@ -11,6 +11,7 @@ public class User
     public string PhoneNumber { get; set; }
     public string Address { get; set; }
     public string Username { get; set; }
+    public bool Admin { get; set; }
     
     
 }

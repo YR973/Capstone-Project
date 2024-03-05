@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Runtime.InteropServices.JavaScript;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MySql.Data.MySqlClient;
@@ -18,17 +19,19 @@ namespace Test.Pages
         private readonly UserContext _userContext;
         private readonly OrderContext _orderContext;
 
-        public Checkout(ILogger<IndexModel> logger, ProductContext context, UserContext userContext, OrderContext orderContext)
+        public Checkout(ILogger<IndexModel> logger, ProductContext context, UserContext userContext,
+            OrderContext orderContext)
         {
             _logger = logger;
             _context = context;
             _userContext = userContext;
             _orderContext = orderContext;
         }
-        
+
 
         public List<Product> Products { get; set; }
-        int max=0;
+        int max = 0;
+
         public async Task GetMaxUserIdAsync()
         {
             if (await _orderContext.Order.AnyAsync())
@@ -56,11 +59,11 @@ namespace Test.Pages
             var user = HttpContext.Session.GetString("User");
             if (cart == null || user == null)
             {
-                
+
                 Console.WriteLine("No user or cart");
                 return RedirectToPage("/Cart");
             }
-            
+
             //deserialize the cart from the session
             CurrentUser = JsonConvert.DeserializeObject<User>(user);
             HttpContext.Session.SetString("User", JsonConvert.SerializeObject(CurrentUser));
@@ -96,7 +99,7 @@ namespace Test.Pages
 
             TotalItems = totalItems;
             TotalCost = totalCost;
-            
+
             foreach (var item in CartDict)
             {
                 products += $"{item.Key}-{item.Value},";
@@ -124,6 +127,7 @@ namespace Test.Pages
                     Products.Add(product);
                 }
             }
+
             int totalItems = 0;
             float totalCost = 0;
             //loop through the cart dictionary and calculate the total items and cost
@@ -139,7 +143,7 @@ namespace Test.Pages
 
             TotalItems = totalItems;
             TotalCost = totalCost;
-            
+
             foreach (var item in CartDict)
             {
                 products += $"{item.Key}-{item.Value},";
@@ -149,29 +153,53 @@ namespace Test.Pages
             string connectionString = "Server=localhost,3306;User ID=root;Password=admin;Database=main;";
             await GetMaxUserIdAsync();
             var user = HttpContext.Session.GetString("User");
-            if(user != null)
+            if (user != null)
             {
                 CurrentUser = JsonConvert.DeserializeObject<User>(user);
                 HttpContext.Session.SetString("User", JsonConvert.SerializeObject(CurrentUser));
 
             }
-            if(CurrentUser != null && products != null)
+
+            if (CurrentUser != null && products != null)
             {
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    if(connection.State == ConnectionState.Open)
+                    if (connection.State == ConnectionState.Open)
                     {
-                        string sqlStatement = $"INSERT INTO `Order` (OrderID, UserID, Products, TotalPrice) VALUES ({max+1}, '{CurrentUser.UserID}', '{products}', '{TotalCost}')";                        using (MySqlCommand command = new MySqlCommand(sqlStatement, connection))
+                        string currentDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        string sqlStatement =
+                            $"INSERT INTO `Order` (OrderID, UserID, Products, TotalPrice, Date, Status) VALUES ({max + 1}, '{CurrentUser.UserID}', '{products}', '{TotalCost}', '{currentDate}', 'Pending')";
+                        using (MySqlCommand command = new MySqlCommand(sqlStatement, connection))
                         {
                             command.ExecuteNonQuery();
                         }
-                    }
-                }
-                HttpContext.Session.Remove("cart");
-                return RedirectToPage("/Account");
-            }
 
+                        foreach (var item in CartDict)
+                        {
+                            var product = Products.FirstOrDefault(p => p.ProductID == item.Key);
+                            if (product != null)
+                            {
+                                totalItems += item.Value;
+                                totalCost += item.Value * product.Price;
+
+                                // decrease the stock of the product using SQL query
+                                string sqlStatement2 =
+                                    $"UPDATE Product SET Stock = Stock - {item.Value} WHERE ProductID = {item.Key}";
+                                using (MySqlCommand command = new MySqlCommand(sqlStatement2, connection))
+                                {
+                                    command.ExecuteNonQuery();
+                                }
+                            }
+                        }
+                    }
+
+                    HttpContext.Session.Remove("cart");
+                    return RedirectToPage("/Account");
+                }
+
+                return null;
+            }
             return null;
         }
     }

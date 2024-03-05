@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "/orders"
 @model Test.Pages.Orders
 
 @{
@@ -12,8 +12,52 @@
     <title></title>
 </head>
 <body>
-<div>
-    
-</div>
+<div class="container">
+		<main>
+			<div class="account-page">
+				<div class="profile">
+                    <div class="profile-img">
+						<h2>@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h2>
+						<h3>@Model.CurrentUser.Username</h3>
+						<p>@Model.CurrentUser.Email</p>
+					</div>
+					<ul>
+						<li><a asp-page="/account">Account <span>></span></a></li>
+						<li><a asp-page="/orders" class="active">My Orders <span>></span></a></li>
+					</ul>
+				</div>
+				<div class="account-detail">					
+					<h2>My Orders</h2>
+					<div class="order-detail">
+						<table>
+							<thead>
+								<tr>
+									<th>Date</th>
+									<th>Order Ref#</th>
+									<th>Amount</th>
+									<th>Payment Mode</th>
+									<th>Status</th>
+									<th>View</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach(var order in Model.Order)
+								{
+									<tr>
+										<td>@order.Date</td>
+										<td>@order.OrderId</td>
+										<td>@order.TotalPrice $</td>
+										<td>Cash</td>
+										<td>@order.Status</td>
+										<td><a asp-page="/ViewOrderDetails" asp-route-id="@order.OrderId">View</a></td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					</div>
+				</div>				
+			</div>		
+		</main> <!-- Main Area -->
+	</div>
 </body>
 </html>
