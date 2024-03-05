@@ -8,5 +8,7 @@
         public int UserId { get; set; }
         public string Products { get; set; }
         public float TotalPrice { get; set; }
+        public DateTime Date { get; set; }
+        public string Status { get; set; }
     }
 }

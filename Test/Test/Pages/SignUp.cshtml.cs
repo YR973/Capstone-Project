@@ -59,7 +59,7 @@ namespace Test.Pages
             {
                 connection.Open();
 
-                string sqlStatement = $"INSERT INTO User (UserID, Username, Email, Password, FirstName, LastName, Address, PhoneNumber) VALUES ({max+2}, '{username}', '{email}', '{password}', '{firstname}', '{lastname}', '{address}', '{phonenumber}')";
+                string sqlStatement = $"INSERT INTO User (UserID, Username, Email, Password, FirstName, LastName, Address, PhoneNumber, Admin) VALUES ({max+2}, '{username}', '{email}', '{password}', '{firstname}', '{lastname}', '{address}', '{phonenumber}'),0";
                 using (MySqlCommand command = new MySqlCommand(sqlStatement, connection))
                 {
                     command.ExecuteNonQuery();

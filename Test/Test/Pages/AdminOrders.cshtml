@@ -1,0 +1,65 @@
+﻿@page "/admin"
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model Test.Pages.AdminOrders
+
+@{
+    Layout = "Shared/AdminHeader";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<main>
+	<div class="main-content">
+			<div class="sidebar">
+				<h3>Menu</h3>
+				<ul>
+					<li><a class="active" href="order.html">Order</a></li>
+					<li><a href="">Users</a></li>
+				</ul>
+			</div>
+		<div class="content">
+			<h3>Order</h3>
+			<div class="content-detail">
+				<table>
+					<thead>
+					<tr>
+						<th>Date</th>
+						<th>Order Ref#</th>
+						<th>User</th>
+						<th>Amount</th>
+						<th>Payment Mode</th>
+						<th>Status</th>
+						<th>View</th>
+					</tr>
+					</thead>
+					<tbody>
+					@foreach (var o in Model.OrderDictionary)
+					{
+						var user = o.Value;
+						var order = o.Key;
+					<tr>
+							<td>@order.Date</td>
+							<td>@order.OrderId</td>
+							<td>@user</td>
+							<td>@order.TotalPrice</td>
+							<td>Cash</td>
+							<td>@order.Status</td>
+							//make the view link to the order details page
+							<td><a>View</a></td>
+					</tr>
+					}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>		
+
+	</main> <!-- Main Area -->
+
+</body>
+</html>
