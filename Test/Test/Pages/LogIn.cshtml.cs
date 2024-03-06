@@ -17,9 +17,14 @@ namespace Test.Pages
             _context = context;
         }
         
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-            
+            if (HttpContext.Session.GetString("User") != null)
+            {
+                return RedirectToPage("/Account");
+            }
+
+            return null;
         }
        
        
