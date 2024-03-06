@@ -37,11 +37,15 @@ namespace Test.Pages
                 return RedirectToPage("/Login");
             }
             Orders = await _context.Order.ToListAsync();
-            //OrderDictionary = new Dictionary<Order, string>();
+            OrderDictionary = new Dictionary<Order, string>();
             foreach (var o in Orders)
             {
                 quser = await _user.User.FirstOrDefaultAsync(m => m.UserID == o.UserId);
-                OrderDictionary.Add(o, quser.Username);
+                if (quser != null)
+                {
+                    OrderDictionary.Add(o, quser.Username);
+                }
+               
             }
             return null;
         }

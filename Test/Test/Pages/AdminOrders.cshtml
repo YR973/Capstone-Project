@@ -49,8 +49,7 @@
 							<td>@order.TotalPrice</td>
 							<td>Cash</td>
 							<td>@order.Status</td>
-							//make the view link to the order details page
-							<td><a>View</a></td>
+							<td><a asp-page="/AdminViewOrder" asp-route-id="@order.OrderId">View</a></td>
 					</tr>
 					}
 					</tbody>

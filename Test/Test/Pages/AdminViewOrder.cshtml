@@ -1,4 +1,5 @@
 ﻿@page "/adminvo"
+@using Test.Models
 @model Test.Pages.AdminViewOrder
 
 @{
@@ -6,28 +7,35 @@
 	int totalItems = 0;
 	float totalCost = 0;
 	//loop through the cart dictionary and calculate the total items and cost
-	foreach (var item in Model.CartDict)
+	
+	if (Model.CartDict!=null)
 	{
-		var product = Model.Products.FirstOrDefault(p => p.ProductID == item.Key);
-		if (product != null)
+		foreach (var item in Model.CartDict)
 		{
-			totalItems += item.Value;
-			totalCost += item.Value * product.Price;
+			var product = Model.Products.FirstOrDefault(p => p.ProductID == item.Key);
+			if (product != null)
+			{
+				totalItems += item.Value;
+				totalCost += item.Value * product.Price;
+			}
 		}
 	}
+	
 }
 
 <!DOCTYPE html>
 
 <html>
 <head>
-    <title></title>
+	<title></title>
+	<link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="container">
 		<main>
 			<h2>Order Details</h2>
 			<h3>Order Status: @Model.order.Status</h3>
+			<h3>Order ID: @Model.order.OrderId</h3>
 			<div class="cart-page">
 				<div class="cart-items">					
 					<table>
@@ -65,7 +73,12 @@
 							<li>Number of items: @totalItems</li>
 							<hr>
 							<li>Total: <span style="float: right;">@totalCost $</span></li>
-							<l1><a>Mark as Delivered</a></l1>
+							<li>
+								<form method="post" asp-route-oid="oid">
+									<input type="number" id="oid" name="oid" value=@Model.order.OrderId/>
+									<input type="submit" value="Mark as Delivered"/>
+								</form>
+							</li>
 						</ul>
 					</div>
 				</div>

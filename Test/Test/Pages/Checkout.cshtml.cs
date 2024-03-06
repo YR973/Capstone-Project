@@ -195,7 +195,7 @@ namespace Test.Pages
                     }
 
                     HttpContext.Session.Remove("cart");
-                    return RedirectToPage("/Account");
+                    return RedirectToPage("/Orders");
                 }
 
                 return null;
