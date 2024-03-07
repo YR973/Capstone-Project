@@ -1,12 +1,10 @@
 ﻿using System.Data;
-using System.Runtime.InteropServices.JavaScript;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using Test.Models;
 using Microsoft.EntityFrameworkCore;
-using Mysqlx.Session;
 
 namespace Test.Pages
 {
@@ -29,9 +27,11 @@ namespace Test.Pages
         }
 
 
+        //list of products
         public List<Product> Products { get; set; }
         int max = 0;
 
+        //get the max user id from the database
         public async Task GetMaxUserIdAsync()
         {
             if (await _orderContext.Order.AnyAsync())
@@ -47,15 +47,20 @@ namespace Test.Pages
 
         //dictionary to store the cart items
         public Dictionary<int, int> CartDict { get; set; }
+        //user object to store the current user
         public User CurrentUser { get; set; }
+        //string to store the products
         string products = "";
+        //total items and cost
         public int TotalItems { get; set; }
+        //total items and cost
         public float TotalCost { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
             //get the cart from the session
             var cart = HttpContext.Session.GetString("cart");
+            //get the user from the session
             var user = HttpContext.Session.GetString("User");
             if (cart == null || user == null)
             {
@@ -64,12 +69,15 @@ namespace Test.Pages
                 return RedirectToPage("/Cart");
             }
 
-            //deserialize the cart from the session
+            //deserialize the user from the session
             CurrentUser = JsonConvert.DeserializeObject<User>(user);
+            //store the user in the session
             HttpContext.Session.SetString("User", JsonConvert.SerializeObject(CurrentUser));
+            //deserialize the cart from the session
             CartDict = string.IsNullOrEmpty(cart)
                 ? new Dictionary<int, int>()
                 : JsonConvert.DeserializeObject<Dictionary<int, int>>(cart);
+            //store the cart in the session
             HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(CartDict));
 
             //initialize the list of products
@@ -100,11 +108,13 @@ namespace Test.Pages
             TotalItems = totalItems;
             TotalCost = totalCost;
 
+            //initialize the products string
             foreach (var item in CartDict)
             {
                 products += $"{item.Key}-{item.Value},";
             }
 
+            //remove the last comma
             products = products.TrimEnd(',');
             return null;
         }
@@ -144,22 +154,27 @@ namespace Test.Pages
             TotalItems = totalItems;
             TotalCost = totalCost;
 
+            //initialize the products string
             foreach (var item in CartDict)
             {
                 products += $"{item.Key}-{item.Value},";
             }
-
+            //remove the last comma
             products = products.TrimEnd(',');
+            //connection string to connect to the database
             string connectionString = "Server=localhost,3306;User ID=root;Password=admin;Database=main;";
+            //get the max user id
             await GetMaxUserIdAsync();
             var user = HttpContext.Session.GetString("User");
             if (user != null)
             {
+                //deserialize the user from the session
                 CurrentUser = JsonConvert.DeserializeObject<User>(user);
                 HttpContext.Session.SetString("User", JsonConvert.SerializeObject(CurrentUser));
 
             }
 
+            //check if the user is logged in and the products list is not empty
             if (CurrentUser != null && products != null)
             {
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -167,6 +182,7 @@ namespace Test.Pages
                     connection.Open();
                     if (connection.State == ConnectionState.Open)
                     {
+                        //insert the order into the database using SQL query
                         string currentDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                         string sqlStatement =
                             $"INSERT INTO `Order` (OrderID, UserID, Products, TotalPrice, Date, Status) VALUES ({max + 1}, '{CurrentUser.UserID}', '{products}', '{TotalCost}', '{currentDate}', 'Pending')";
@@ -175,6 +191,7 @@ namespace Test.Pages
                             command.ExecuteNonQuery();
                         }
 
+                        //loop through the cart dictionary and calculate the total items and cost
                         foreach (var item in CartDict)
                         {
                             var product = Products.FirstOrDefault(p => p.ProductID == item.Key);
@@ -186,6 +203,7 @@ namespace Test.Pages
                                 // decrease the stock of the product using SQL query
                                 string sqlStatement2 =
                                     $"UPDATE Product SET Stock = Stock - {item.Value} WHERE ProductID = {item.Key}";
+                                // execute the SQL command
                                 using (MySqlCommand command = new MySqlCommand(sqlStatement2, connection))
                                 {
                                     command.ExecuteNonQuery();
@@ -194,6 +212,7 @@ namespace Test.Pages
                         }
                     }
 
+                    //clear the cart
                     HttpContext.Session.Remove("cart");
                     return RedirectToPage("/Orders");
                 }

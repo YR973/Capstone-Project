@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using Test.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -53,6 +51,7 @@ namespace Test.Pages
             if (cartDict.ContainsKey(id))
             {
                 cartDict.Remove(id);
+                //serialize the cart and store it in the session
                 HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(cartDict));
             }
             //redirect to the cart page

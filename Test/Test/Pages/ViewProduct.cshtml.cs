@@ -1,11 +1,9 @@
-﻿namespace Test.Pages
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Test.Models;
+using Newtonsoft.Json;
+namespace Test.Pages
 {
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.RazorPages;
-    using Microsoft.EntityFrameworkCore;
-    using Test.Models;
-    using Newtonsoft.Json;
-
     public class ViewProductModel : PageModel
     {
         private readonly ProductContext _context;

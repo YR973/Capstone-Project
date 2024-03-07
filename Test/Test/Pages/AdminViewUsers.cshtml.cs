@@ -9,6 +9,7 @@ namespace Test.Pages
         private readonly UserContext _context;
         public List<User> Users { get; set; }
 
+        // Constructor
         public AdminViewUsers(UserContext context)
         {
             _context = context;
@@ -16,6 +17,7 @@ namespace Test.Pages
 
         public void OnGet()
         {
+            // Get all users from the database
             Users = _context.User.ToList();
         }
     }

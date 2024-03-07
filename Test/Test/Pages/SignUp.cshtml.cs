@@ -1,13 +1,9 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Test;
 using MySql.Data.MySqlClient;
-using Test.Models;
 
 namespace Test.Pages
 {
