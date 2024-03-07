@@ -1,0 +1,61 @@
+﻿@page
+@model Test.Pages.AdminViewUsers
+
+@{
+    Layout = "Shared/AdminHeader";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<main>
+	<div class="main-content">
+			<div class="sidebar">
+				<h3>Menu</h3>
+				<ul>
+					<li><a asp-page="/AdminOrders">Order</a></li>
+					<li><a asp-page="/AdminViewUsers" class="active">Users</a></li>
+				</ul>
+			</div>
+		<div class="content">
+			<h3>Users</h3>
+			<div class="content-detail">
+				<table>
+					<thead>
+					<tr>
+						<th>UserID</th>
+						<th>FName</th>
+						<th>User</th>
+						<th>E-Mail</th>
+						<th>Phone</th>
+						<th>Address</th>
+						<th>Admin Status</th>
+					</tr>
+					</thead>
+					<tbody>
+					@foreach (var o in Model.Users)
+					{
+					<tr>
+							<td>@o.UserID</td>
+							<td>@o.FirstName<br/>@o.LastName</td>
+							<td>@o.Username</td>
+							<td>@o.Email</td>
+							<td>@o.PhoneNumber</td>
+							<td>@o.Address</td>
+							<td>@o.Admin</td>
+					</tr>
+					}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>		
+
+	</main> <!-- Main Area -->
+
+</body>
+</html>

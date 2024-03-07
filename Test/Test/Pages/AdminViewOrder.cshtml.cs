@@ -54,7 +54,7 @@ namespace Test.Pages
         public void SetAsDelivered(int order)
         {
             string connectionString = "Server=localhost,3306;User ID=root;Password=admin;Database=main;";
-            string updateOrderStatusSql = $"UPDATE `order` SET Status = 'delivered' WHERE OrderID = @order";
+            string updateOrderStatusSql = $"UPDATE `order` SET Status = 'Delivered' WHERE OrderID = @order";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (MySqlCommand command = new MySqlCommand(updateOrderStatusSql, connection))
