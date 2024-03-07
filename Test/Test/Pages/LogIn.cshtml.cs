@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
@@ -26,6 +27,14 @@ namespace Test.Pages
 
             return null;
         }
+        public static string HashPassword(string password)
+        {
+            using (var sha256 = System.Security.Cryptography.SHA256.Create())
+            {
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+            }
+        }
        
        
 
@@ -33,9 +42,9 @@ namespace Test.Pages
         {
             // for debugging
             Console.Write("email: " + email);
-            Console.Write("password: " + password);
             //query the database for the user
-            var user = await _context.User.FirstOrDefaultAsync(u => u.Email == email.Trim() && u.Password == password.Trim());
+            string hashedPassword = HashPassword(password);
+            var user = await _context.User.FirstOrDefaultAsync(u => u.Email == email.Trim() && u.Password == hashedPassword.Trim());
             // if the user is found, store the user in the session and redirect to the index page
             if (user != null)
             {
