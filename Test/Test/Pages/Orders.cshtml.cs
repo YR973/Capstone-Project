@@ -2,7 +2,6 @@
 using Test.Models;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Test.Pages

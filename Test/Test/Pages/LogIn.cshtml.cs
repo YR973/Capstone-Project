@@ -1,11 +1,9 @@
 ﻿using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Test.Models;
+
 
 namespace Test.Pages
 {
