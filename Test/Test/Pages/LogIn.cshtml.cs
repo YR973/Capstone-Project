@@ -25,14 +25,6 @@ namespace Test.Pages
 
             return null;
         }
-        public static string HashPassword(string password)
-        {
-            using (var sha256 = System.Security.Cryptography.SHA256.Create())
-            {
-                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
-            }
-        }
        
        
 
@@ -41,8 +33,7 @@ namespace Test.Pages
             // for debugging
             Console.Write("email: " + email);
             //query the database for the user
-            string hashedPassword = HashPassword(password);
-            var user = await _context.User.FirstOrDefaultAsync(u => u.Email == email.Trim() && u.Password == hashedPassword.Trim());
+            var user = await _context.User.FirstOrDefaultAsync(u => u.Email == email.Trim() && u.Password == password);
             // if the user is found, store the user in the session and redirect to the index page
             if (user != null)
             {

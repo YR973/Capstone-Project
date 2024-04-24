@@ -11,18 +11,19 @@ namespace Test.Pages
     public class Account : PageModel
     {
         public User CurrentUser { get; set; }
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
             // If the user is not logged in, redirect to the login page
             if (HttpContext.Session.GetString("User") == null)
             {
-                Response.Redirect("/LogIn");
+                return Redirect("/LogIn");
             }
             else
             {
                 // Get the user data from the session
                 var userData = HttpContext.Session.GetString("User");
                 CurrentUser = JsonConvert.DeserializeObject<User>(userData);
+                return null;
             }
         }
         
