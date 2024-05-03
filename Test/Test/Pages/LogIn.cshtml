@@ -13,6 +13,11 @@
 <body>
 <div class="container">
     <main>
+        <div class="breadcrumb">
+        			<ul>
+        				<li>LogIN</li>
+        			</ul>
+        		</div>
         <div class="contact">
             <h2 class="heading">Log In</h2>
             <form class="checkout-form" method="post" asp-route-email="email" asp-route-password="password">
@@ -26,11 +31,11 @@
                 </div>
                 <div class="form-group">
                     <label></label>
-                    <input type="submit" id="loginbutton" name="loginbutton" value="Send">
+                    <input type="submit" id="loginbutton" name="loginbutton" value="Login">
                 </div>
                 <div>New User? <a asp-page="/signup">Register</a></div>
             </form>
-            
+
         </div>
     </main> 
 </div>

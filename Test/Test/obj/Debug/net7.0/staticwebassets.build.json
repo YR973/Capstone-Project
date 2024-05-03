@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "WtuY0SCEwskjSmxKKhFHOEzy1TYaqtSy9Y5+rycsefM=",
+  "Hash": "fn216L7fLw3Wx9YKimYI5/5YwopxL6PVtQ3pFcY6nsY=",
   "Source": "Test",
   "BasePath": "_content/Test",
   "Mode": "Default",
@@ -3245,6 +3245,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\jquery.min.js"
+    },
+    {
+      "Identity": "C:\\Users\\yfroo\\Documents\\GitHub\\hello\\Capstone-Project\\Test\\Test\\wwwroot\\js\\search.js",
+      "SourceId": "Test",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\yfroo\\Documents\\GitHub\\hello\\Capstone-Project\\Test\\Test\\wwwroot\\",
+      "BasePath": "_content/Test",
+      "RelativePath": "js/search.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\search.js"
     },
     {
       "Identity": "C:\\Users\\yfroo\\Documents\\GitHub\\hello\\Capstone-Project\\Test\\Test\\wwwroot\\js\\site.js",

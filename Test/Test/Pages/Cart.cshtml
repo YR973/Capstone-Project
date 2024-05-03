@@ -25,30 +25,37 @@
 </head>
 <body>
 <div class="container">
-		<main>
-			<h2>Shopping Cart</h2>
-			<div class="cart-page">
-				<div class="cart-items">					
-					<table>
-						<thead>
-							<tr>
-								<th colspan="3">Cart Items</th>
-							</tr>
-						</thead>
+	<main>
+		<div class="breadcrumb">
+        			<ul>
+        				<li>Cart</li>
+        			</ul>
+        		</div>
+		<h2>Shopping Cart</h2>
+		<div class="cart-page">
+			<div class="cart-items">
+				<table>
+					<thead>
+					<tr>
+						<th colspan="3">Cart Items</th>
+					</tr>
+					</thead>
 					<tbody>
-					@foreach(var product in Model.Products)
+					@foreach (var product in Model.Products)
 					{
 						<tr>
-							<td style="width: 20%;"><img src="img/img/products/@(product.ProductID).jpg"></td>
+							<td style="width: 20%;"><img src="img/img/product/@(product.ProductID).png"></td>
 							<td style="width: 60%;">
 								<h2>@product.Name</h2>
 								<p>@product.Description</p>
 								<br>
 								<h3>Price: @product.Price $</h3>
 								<br>
-								<form method="post" asp-page-handler="RemoveFromCart" asp-route-id="@product.ProductID">
-                                    <input type="submit" value="Remove">
-                                </form>
+								<div class="form-group">
+									<form class="form-group" method="post" asp-page-handler="RemoveFromCart" asp-route-id="@product.ProductID">
+										<input class="remove-button" type="submit" value="Remove">
+									</form>
+								</div>
 							</td>
 							<td class="qty" style="width: 15%;">
 								<div>@Model.CartDict[product.ProductID]</div>
@@ -58,21 +65,21 @@
 						</tr>
 					}
 					</tbody>
-					</table>
+				</table>
+			</div>
+			<div class="cart-summary">
+				<div class="checkout-total">
+					<h3>Cart Summary</h3>
+					<ul>
+						<li>Number of items: @totalItems</li>
+						<hr>
+						<li>Cart Total: <span style="float: right;">@totalCost $</span></li>
+						<li><a asp-page="/Checkout">Go to Checkout</a></li>
+					</ul>
 				</div>
-				<div class="cart-summary">
-					<div class="checkout-total">
-						<h3>Cart Summary</h3>
-						<ul>
-							<li>Number of items: @totalItems</li>
-                            <hr>
-                            <li>Cart Total: <span style="float: right;">@totalCost $</span></li>
-							<li><a asp-page="/Checkout">Go to Checkout</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>		
-		</main> 
+			</div>
+		</div>
+	</main> 
 	</div>
 </body>
 </html>
