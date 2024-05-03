@@ -29,7 +29,7 @@ namespace Test.Pages
 
         //list of products
         public List<Product> Products { get; set; }
-        int max = 0;
+        int _max = 0;
 
         //get the max user id from the database
         public async Task GetMaxUserIdAsync()
@@ -37,11 +37,11 @@ namespace Test.Pages
             if (await _orderContext.Order.AnyAsync())
             {
                 int maxId = await _orderContext.Order.MaxAsync<Order, int>(u => u.OrderId);
-                max = maxId;
+                _max = maxId;
             }
             else
             {
-                max = 0;
+                _max = 0;
             }
         }
 
@@ -50,7 +50,7 @@ namespace Test.Pages
         //user object to store the current user
         public User CurrentUser { get; set; }
         //string to store the products
-        string products = "";
+        string _products = "";
         //total items and cost
         public int TotalItems { get; set; }
         //total items and cost
@@ -70,13 +70,13 @@ namespace Test.Pages
             }
 
             //deserialize the user from the session
-            CurrentUser = JsonConvert.DeserializeObject<User>(user);
+            CurrentUser = JsonConvert.DeserializeObject<User>(user)!;
             //store the user in the session
             HttpContext.Session.SetString("User", JsonConvert.SerializeObject(CurrentUser));
             //deserialize the cart from the session
-            CartDict = string.IsNullOrEmpty(cart)
+            CartDict = (string.IsNullOrEmpty(cart)
                 ? new Dictionary<int, int>()
-                : JsonConvert.DeserializeObject<Dictionary<int, int>>(cart);
+                : JsonConvert.DeserializeObject<Dictionary<int, int>>(cart))!;
             //store the cart in the session
             HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(CartDict));
 
@@ -111,20 +111,20 @@ namespace Test.Pages
             //initialize the products string
             foreach (var item in CartDict)
             {
-                products += $"{item.Key}-{item.Value},";
+                _products += $"{item.Key}-{item.Value},";
             }
 
             //remove the last comma
-            products = products.TrimEnd(',');
+            _products = _products.TrimEnd(',');
             return null;
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
             var cart = HttpContext.Session.GetString("cart");
-            CartDict = string.IsNullOrEmpty(cart)
+            CartDict = (string.IsNullOrEmpty(cart)
                 ? new Dictionary<int, int>()
-                : JsonConvert.DeserializeObject<Dictionary<int, int>>(cart);
+                : JsonConvert.DeserializeObject<Dictionary<int, int>>(cart))!;
             HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(CartDict));
             //initialize the list of products
             Products = new List<Product>();
@@ -157,10 +157,10 @@ namespace Test.Pages
             //initialize the products string
             foreach (var item in CartDict)
             {
-                products += $"{item.Key}-{item.Value},";
+                _products += $"{item.Key}-{item.Value},";
             }
             //remove the last comma
-            products = products.TrimEnd(',');
+            _products = _products.TrimEnd(',');
             //connection string to connect to the database
             string connectionString = "Server=localhost,3306;User ID=root;Password=admin;Database=main;";
             //get the max user id
@@ -175,7 +175,7 @@ namespace Test.Pages
             }
 
             //check if the user is logged in and the products list is not empty
-            if (CurrentUser != null && products != null)
+            if (CurrentUser != null && _products != null)
             {
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
@@ -185,7 +185,7 @@ namespace Test.Pages
                         //insert the order into the database using SQL query
                         string currentDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                         string sqlStatement =
-                            $"INSERT INTO `Order` (OrderID, UserID, Products, TotalPrice, Date, Status) VALUES ({max + 1}, '{CurrentUser.UserID}', '{products}', '{TotalCost}', '{currentDate}', 'Pending')";
+                            $"INSERT INTO `Order` (OrderID, UserID, Products, TotalPrice, Date, Status) VALUES ({_max + 1}, '{CurrentUser.UserID}', '{_products}', '{TotalCost}', '{currentDate}', 'Pending')";
                         using (MySqlCommand command = new MySqlCommand(sqlStatement, connection))
                         {
                             command.ExecuteNonQuery();

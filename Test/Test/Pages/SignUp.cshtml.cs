@@ -15,14 +15,7 @@ namespace Test.Pages
         {
             return await _context.User.AnyAsync(u => u.Email == email);
         }
-        public static string HashPassword(string password)
-        {
-            using (var sha256 = System.Security.Cryptography.SHA256.Create())
-            {
-                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
-            }
-        }
+        
         public SignUp(UserContext context)
         {
             _context = context;
@@ -37,13 +30,14 @@ namespace Test.Pages
         }
         
         
-        public void OnGet()
+        public async Task<IActionResult> OnGetasync()
         {
             if (HttpContext.Session.GetString("User") != null)
             {
-                Response.Redirect("/Account");
+                return Redirect("/Account");
             }
             GetMaxUserIdAsync();
+            return null;
         }
 
         public async Task<IActionResult> OnPostAsync(string username, string email, string password, string firstname,
@@ -53,9 +47,9 @@ namespace Test.Pages
             string emailPattern = @"^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$";
             string usernamePattern = @"^[\w-]{3,}$";
             string passwordPattern = @"^(?=.*\d).{8,}$";
-            if (!Regex.IsMatch(username,usernamePattern) ||
-                !Regex.IsMatch(email,emailPattern) ||
-                !Regex.IsMatch(password,passwordPattern) ||
+            if (!Regex.IsMatch(username,usernamePattern) == false ||
+                !Regex.IsMatch(email,emailPattern) == false ||
+                !Regex.IsMatch(password,passwordPattern) ==false ||
                 string.IsNullOrWhiteSpace(firstname) ||
                 string.IsNullOrWhiteSpace(lastname) ||
                 string.IsNullOrWhiteSpace(address) ||
@@ -65,7 +59,7 @@ namespace Test.Pages
                 Console.Write("FAILURE");
                 return Page();
             }
-            string hashed = HashPassword(password);
+            
             if (EmailExistsAsync(email).Result)
             {
                 Console.Write("E-Mail exists");
@@ -78,7 +72,7 @@ namespace Test.Pages
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                string sqlStatement = $"INSERT INTO User (UserID, Username, Email, Password, FirstName, LastName, Address, PhoneNumber, Admin) VALUES ({max+2}, '{username}', '{email}', '{hashed}', '{firstname}', '{lastname}', '{address}', '{phonenumber}', 0)";
+                string sqlStatement = $"INSERT INTO User (UserID, Username, Email, Password, FirstName, LastName, Address, PhoneNumber, Admin) VALUES ({max+2}, '{username}', '{email}', '{password}', '{firstname}', '{lastname}', '{address}', '{phonenumber}', 0)";
                 using (MySqlCommand command = new MySqlCommand(sqlStatement, connection))
                 {
                     command.ExecuteNonQuery();

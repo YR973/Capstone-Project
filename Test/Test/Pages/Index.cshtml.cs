@@ -8,12 +8,11 @@ namespace Test.Pages
 
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        //database context
         private readonly ProductContext _context;
 
         public IndexModel(ILogger<IndexModel> logger, ProductContext context)
         {
-            _logger = logger;
             _context = context;
         }
 
@@ -23,6 +22,7 @@ namespace Test.Pages
         //get the first 8 products
         public async Task OnGetAsync()
         {
+            //get the first 8 products
             Products = await _context.Product.Take(8).ToListAsync();
         }
 
