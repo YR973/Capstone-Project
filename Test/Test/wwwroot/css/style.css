@@ -5,6 +5,7 @@
 	--darkStaleGray: #2F4F4F;
 	--white: #FFFFFF;
 }
+
 /* Import Font */
 @font-face {
 	font-family: 'Roboto';
@@ -14,7 +15,9 @@
 *{
 	padding: 0;
 	margin: 0;
-	font-family: Roboto;
+	font-family: "Roboto", sans-serif;
+	font-weight: 400;
+	font-style: normal;
 	font-size: 14px;
 	font-weight: normal;
 	box-sizing: border-box;
@@ -244,6 +247,38 @@ main .new-product-section{
 main .new-product-section .product-section-heading{
 	text-align: center;
 }
+.remove-button {
+	background-color: #ff6347; /* Coral */
+	color: #fff; /* White */
+	border: none;
+	border-radius: 4px;
+	padding: 8px 16px;
+	cursor: pointer;
+	font-size: 14px;
+	text-transform: uppercase;
+	transition: background-color 0.3s ease;
+}
+
+.remove-button:hover {
+	background-color: #d32f2f; /* Darker Coral on hover */
+}
+
+.remove-button:focus {
+	outline: none; /* Removing default focus outline */
+	box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.5); /* Adding custom focus effect */
+}
+
+/* Style for input[type="button"] with class .remove-button */
+input[type="button"].remove-button {
+	/* Add additional styles specific to input[type="button"] */
+	/* For example, you may want to adjust padding or font-size */
+	/* Example:
+    padding: 8px 12px;
+    font-size: 14px;
+    */
+}
+
+
 main .new-product-section .product-section-heading h2{
 	color: var(--darkStaleGray);
 	font-size: 24px;
@@ -270,6 +305,7 @@ main .product-content{
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-column-gap: 25px;
 	grid-row-gap: 40px;
+	padding-left: 40px;
 }
 main .product-content .product img{
 	width: 100%;
@@ -326,7 +362,7 @@ main .collection{
 main .collection .men-collection{
 	width: 49%;
 	height: 200px;
-	background: gray url(../img/other/men-collection.jpg) no-repeat;
+	/*background: gray url(../img/other/men-collection.jpg) no-repeat;*/
 	background-size: cover;
 	background-blend-mode: multiply;
 	text-align: right;
@@ -336,7 +372,7 @@ main .collection .men-collection{
 main .collection .women-collection{
 	width: 49%;
 	height: 200px;
-	background: gray url(../img/other/women-collection.jpg) no-repeat;
+	/*background: gray url(../img/other/women-collection.jpg) no-repeat;*/
 	background-size: cover;
 	background-blend-mode: multiply;
 	text-align: left;
@@ -589,10 +625,10 @@ main .single-product .product-detail .product-cart #wishlist-form input[type="ch
 	position: absolute;
 	top: 6px;
 	left: 0;
-	background: url(../img/icons/heart.png);
+	/*background: url(../img/icons/heart.png);*/
 }
 main .single-product .product-detail .product-cart #wishlist-form input:checked[type="checkbox"]:before{
-	background: url(../img/icons/heart_fill.png);
+	/*background: url(../img/icons/heart_fill.png);*/
 }
 main .single-product .product-detail .product-meta p{
 	margin-bottom: 20px;
@@ -1120,4 +1156,80 @@ main .account-page .account-detail table td{
 
 .signup-link a {
 	text-decoration: underline;
+}
+
+.search-container {
+	/* margin-top: 20px; */
+	display: inline-block;
+	text-align: center;
+}
+
+input[type="text"] {
+	padding: 10px;
+	/* width: 300px; */
+	border-radius: 5px 0 0 5px;
+	border: 1px solid #ccc;
+	border-right: none;
+	margin: 0;
+}
+input[type="text"]:focus {
+	border: none;
+}
+
+
+.search-button {
+	padding: 9px ;
+	background-color: #467777;
+	color: #fff;
+	border: none;
+	border-radius: 0 10px 5px 0;
+	cursor: pointer;
+	margin: 0;
+
+}
+
+
+button:hover {
+	background-color:#2F4F4F;
+	}
+#suggestions {
+	position: fixed;
+	top: 0;
+	z-index: 9999;
+}
+
+
+.search-container {
+	/* margin-top: 20px; /
+    display: inline-block;
+    text-align: center;
+  }
+
+  input[type="text"] {
+    padding: 10px;
+    / width: 300px; */
+	border-radius: 5px 0 0 5px;
+	border: 1px solid #ccc;
+	border-right: none;
+	margin: 0;
+}
+input[type="text"]:focus {
+	border: none;
+}
+
+
+.search-button {
+	padding: 9px ;
+	background-color: #467777;
+	color: #fff;
+	border: none;
+	border-radius: 0 10px 5px 0;
+	cursor: pointer;
+	margin: 0;
+
+}
+
+
+button:hover {
+	background-color: #2F4F4F;
 }

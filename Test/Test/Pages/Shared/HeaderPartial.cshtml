@@ -1,8 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>My Store</title>
-    <link href="css/style.css" rel="stylesheet" />
+	<title>My Store</title>
+	
+	<link href="css/style.css" rel="stylesheet" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 
 <header>
@@ -33,22 +37,38 @@
         </div> <!-- brand -->
 
         <div class="menu-bar">
-            <div class="menu">
-                <ul>
-                    <li><a asp-page="Index">Home</a></li>
-                    <li><a asp-page="/cart">Cart</a></li>
-	                <li><a asp-page="/account">Account</a></li>
-	                <li><a asp-page="/AdminOrders">Admin</a></li>
-                </ul>
-            </div>
-            <div class="search-bar">
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="search" placeholder="Search">
-                        <img src="img/img/icons/search.png">
-                    </div>
-                </form>
-            </div>
+	        <div class="menu">
+		        <ul>
+			        <li><a asp-page="Index">Home</a></li>
+			        <li><a asp-page="/cart">Cart</a></li>
+			        <li><a asp-page="/account">Account</a></li>
+			        <li><a asp-page="/AdminOrders">Admin</a></li>
+		        </ul>
+	        </div>
+	        <form method="get" asp-page="/SearchPage">
+		        <div class="search-container">
+			        <input type="text" id="searchInput" name="query" placeholder="Search...">
+			        <button class="search-button" type="submit" id="searchButton">🔍</button>
+			        <div id="searchResults"></div>
+		        </div>
+	        </form>
+	        @* <div class="search-bar"> *@
+         @*        <form method="get" asp-page="/SearchPage"> *@
+         @*            <div class="form-group"> *@
+         @*                <input type="text" class="form-control" id="search-input" name="query" placeholder="Search"> *@
+         @*                <button type="submit"> *@
+	        @*                 <img src="img/img/icons/search.png"> *@
+         @*                </button> *@
+         @*                <div id="suggestions" style="display: none;"> *@
+	        @*                 <p></p> *@
+	        @*                 <br/> *@
+	        @*                 <p></p> *@
+	        @*                 <br/> *@
+	        @*                 <p></p> *@
+         @*                </div> *@
+         @*            </div> *@
+         @*        </form> *@
+         @*    </div> *@
         </div> <!-- menu -->
     </div> <!-- container -->
 </header> <!-- header -->
@@ -93,9 +113,9 @@
     					<div class="widget-content">
     						<div class="follow">
     							<ul>
-    								<li><a asp-page="Index"><img src="img/icons/facebook.png"></a></li>
-    								<li><a asp-page="Index"><img src="img/icons/twitter.png"></a></li>
-    								<li><a asp-page="Index"><img src="img/icons/instagram.png"></a></li>
+    								<li><a asp-page="Index"><img src="img/img/icons/facebook.png"></a></li>
+    								<li><a asp-page="Index"><img src="img/img/icons/twitter.png"></a></li>
+    								<li><a asp-page="Index"><img src="img/img/icons/instagram.png"></a></li>
     							</ul>
     						</div>						
     					</div>

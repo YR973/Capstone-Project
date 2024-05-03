@@ -1,0 +1,43 @@
+﻿@page
+@model Test.Pages.SearchPage
+
+@{
+    Layout = "Shared/HeaderPartial";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Search</title>
+</head>
+<body>
+<div class="container">
+	<main>
+		<div class="breadcrumb">
+			<ul>
+				<li>Search</li>
+			</ul>
+		</div>
+		<div class="new-product-section shop">
+			<div class="product-content">
+				@foreach (var item in Model.products)
+				{
+					<div class="product">
+						<a asp-page="/ViewProduct" asp-route-id="@item.ProductID">
+							<img src="img/img/product/@(item.ProductID).png">
+						</a>
+						<div class="product-detail">
+							<h3>Category</h3>
+							<h2>@item.Name</h2>
+							<a asp-page="/ViewProduct" asp-route-id="@item.ProductID">View product</a>
+							<p>@item.Price</p>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	</main>
+	</div>
+</body>
+</html>
