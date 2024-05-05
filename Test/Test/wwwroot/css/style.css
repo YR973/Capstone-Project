@@ -1200,14 +1200,6 @@ button:hover {
 
 
 .search-container {
-	/* margin-top: 20px; /
-    display: inline-block;
-    text-align: center;
-  }
-
-  input[type="text"] {
-    padding: 10px;
-    / width: 300px; */
 	border-radius: 5px 0 0 5px;
 	border: 1px solid #ccc;
 	border-right: none;
