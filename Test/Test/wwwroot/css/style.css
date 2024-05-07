@@ -191,8 +191,8 @@ main{
 	height: auto;
 	background-color: var(--white);
 	padding: 30px;
-	margin-top: -40px;
-	margin-bottom: -40px;
+	margin-top: 0px;
+	margin-bottom: 0px;
 	box-shadow: 0 0 2px #808080;
 	position: relative;
 	z-index: 100;
@@ -1192,11 +1192,7 @@ input[type="text"]:focus {
 button:hover {
 	background-color:#2F4F4F;
 	}
-#suggestions {
-	position: fixed;
-	top: 0;
-	z-index: 9999;
-}
+
 
 
 .search-container {
@@ -1204,6 +1200,7 @@ button:hover {
 	border: 1px solid #ccc;
 	border-right: none;
 	margin: 0;
+	
 }
 input[type="text"]:focus {
 	border: none;
@@ -1224,4 +1221,26 @@ input[type="text"]:focus {
 
 button:hover {
 	background-color: #2F4F4F;
+}
+
+.search-results {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	background-color: white;
+	border: 1px solid #ccc;
+	border-top: none;
+	display: none;
+	z-index: 9999;
+	
+}
+
+.suggestion {
+	/* padding: 5px; */
+	cursor: pointer;
+}
+
+.suggestion:hover {
+	background-color:#f0f0f0;
 }
