@@ -23,7 +23,7 @@ namespace Test.Pages
         {
             var list = PythonClass.RunScript(query);
             var ids = list.Select(id => int.Parse(id)).ToList();
-            Products = await _context.Product.Where(m => ids.Contains(m.ProductID)).ToListAsync<Product>();
+            Products = await _context.Product.Where(m => ids.Contains(m.ProductID)).ToListAsync<Product>(); Thread.Sleep(20000);
             return null;
         }
 
