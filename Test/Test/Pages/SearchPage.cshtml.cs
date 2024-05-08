@@ -10,7 +10,7 @@ namespace Test.Pages
     public class SearchPage : PageModel
     {
         
-        public List<Product> Products;
+        public List<Product> Products = new List<Product>();
         private readonly ProductContext _context;
         
 
@@ -23,8 +23,8 @@ namespace Test.Pages
         {
             var list = PythonClass.RunScript(query);
             var ids = list.Select(id => int.Parse(id)).ToList();
-            Products = await _context.Product.Where(m => ids.Contains(m.ProductID)).ToListAsync<Product>(); Thread.Sleep(20000);
-            return null;
+            Products = await _context.Product.Where(m => ids.Contains(m.ProductID)).ToListAsync<Product>();
+            return Page();
         }
 
         
