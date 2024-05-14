@@ -46,6 +46,10 @@ namespace Test.Pages
             string phone, 
             string password)
         {
+            if (email== null || password == null || firstName == null || lastName == null || username == null || address == null || phone == null)
+            {
+                return RedirectToPage("/Account");
+            }
             // If the user is not logged in, redirect to the login page
             if (HttpContext.Session.GetString("User") == null)
             {
@@ -54,7 +58,7 @@ namespace Test.Pages
             // Get the user data from the session
             var userData = HttpContext.Session.GetString("User");
             var currentUser = JsonConvert.DeserializeObject<User>(userData);
-            string hashed = HashPassword(password);
+            
             
             string connectionString = "Server=localhost,3306;User ID=root;Password=admin;Database=main;";
             // Update the user data in the database
@@ -70,7 +74,8 @@ namespace Test.Pages
                 }
                 else
                 {
-                     sqlStatement = $"UPDATE User SET FirstName = '{firstName}', LastName = '{lastName}', Username = '{username}', Email = '{email}', Address = '{address}', PhoneNumber = '{phone}', Password = '{hashed}' WHERE UserID = {currentUser.UserID}";
+                    string hashed = HashPassword(password);
+                    sqlStatement = $"UPDATE User SET FirstName = '{firstName}', LastName = '{lastName}', Username = '{username}', Email = '{email}', Address = '{address}', PhoneNumber = '{phone}', Password = '{hashed}' WHERE UserID = {currentUser.UserID}";
                 }
 
                 using (MySqlCommand command = new MySqlCommand(sqlStatement, connection))
@@ -92,6 +97,16 @@ namespace Test.Pages
             HttpContext.Session.SetString("User", JsonConvert.SerializeObject(currentUser));
 
             return RedirectToPage();
+        }
+        
+        public async Task<IActionResult> OnPostLogoutAsync()
+        {
+            // Clear the user session
+            
+            HttpContext.Session.Clear();
+
+            // Redirect to the login page
+            return RedirectToPage("/LogIn");
         }
     }
 }

@@ -22,6 +22,14 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/yfroo/Documents/GitHub/hello/Capstone-Project/Test/Test/Pages/AdminAddItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5BZGRJdGVtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yfroo/Documents/GitHub/hello/Capstone-Project/Test/Test/Pages/AdminAddStock.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5BZGRTdG9jay5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/yfroo/Documents/GitHub/hello/Capstone-Project/Test/Test/Pages/AdminOrders.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5PcmRlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

@@ -394,3 +394,4 @@ C:\Users\yfroo\Documents\GitHub\hello\Capstone-Project\Test\Test\obj\Release\net
 C:\Users\yfroo\Documents\GitHub\hello\Capstone-Project\Test\Test\obj\Release\net7.0\linux-x64\Test.pdb
 C:\Users\yfroo\Documents\GitHub\hello\Capstone-Project\Test\Test\obj\Release\net7.0\linux-x64\Test.genruntimeconfig.cache
 C:\Users\yfroo\Documents\GitHub\hello\Capstone-Project\Test\Test\obj\Release\net7.0\linux-x64\ref\Test.dll
+C:\Users\yfroo\Documents\GitHub\hello\Capstone-Project\Test\Test\bin\Release\net7.0\linux-x64\Python.Runtime.dll

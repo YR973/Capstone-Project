@@ -75,6 +75,7 @@
 							<li>Total: <span style="float: right;">@totalCost $</span></li>
 							<li>
 								<form method="post" asp-route-oid="oid">
+									<label>Enter Order ID</label>
 									<input type="number" id="oid" name="oid" value=@Model.order.OrderId/>
 									<input type="submit" value="Mark as Delivered"/>
 								</form>

@@ -29,21 +29,21 @@ namespace Test.Pages
 
         //list of products
         public List<Product> Products { get; set; }
-        int _max = 0;
+        //int _max = 0;
 
         //get the max user id from the database
-        public async Task GetMaxUserIdAsync()
-        {
-            if (await _orderContext.Order.AnyAsync())
-            {
-                int maxId = await _orderContext.Order.MaxAsync<Order, int>(u => u.OrderId);
-                _max = maxId;
-            }
-            else
-            {
-                _max = 0;
-            }
-        }
+        // public async Task GetMaxUserIdAsync()
+        // {
+        //     if (await _orderContext.Order.AnyAsync())
+        //     {
+        //         int maxId = await _orderContext.Order.MaxAsync<Order, int>(u => u.OrderId);
+        //         _max = maxId;
+        //     }
+        //     else
+        //     {
+        //         _max = 0;
+        //     }
+        // }
 
         //dictionary to store the cart items
         public Dictionary<int, int> CartDict { get; set; }
@@ -119,107 +119,141 @@ namespace Test.Pages
             return null;
         }
 
+        // public async Task<IActionResult> OnPostAsync()
+        // {
+        //     var cart = HttpContext.Session.GetString("cart");
+        //     CartDict = (string.IsNullOrEmpty(cart)
+        //         ? new Dictionary<int, int>()
+        //         : JsonConvert.DeserializeObject<Dictionary<int, int>>(cart))!;
+        //     HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(CartDict));
+        //     //initialize the list of products
+        //     Products = new List<Product>();
+        //     //loop through the cart items and add the products to the list
+        //     foreach (var item in CartDict)
+        //     {
+        //         var product = await _context.Product.FindAsync(item.Key);
+        //         if (product != null)
+        //         {
+        //             Products.Add(product);
+        //         }
+        //     }
+        //
+        //     int totalItems = 0;
+        //     float totalCost = 0;
+        //     //loop through the cart dictionary and calculate the total items and cost
+        //     foreach (var item in CartDict)
+        //     {
+        //         var product = Products.FirstOrDefault(p => p.ProductID == item.Key);
+        //         if (product != null)
+        //         {
+        //             totalItems += item.Value;
+        //             totalCost += item.Value * product.Price;
+        //         }
+        //     }
         public async Task<IActionResult> OnPostAsync()
+{
+    var cart = HttpContext.Session.GetString("cart");
+    CartDict = (string.IsNullOrEmpty(cart)
+        ? new Dictionary<int, int>()
+        : JsonConvert.DeserializeObject<Dictionary<int, int>>(cart))!;
+    HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(CartDict));
+    //initialize the list of products
+    Products = new List<Product>();
+    //loop through the cart items and add the products to the list
+    foreach (var item in CartDict)
+    {
+        var product = await _context.Product.FindAsync(item.Key);
+        if (product != null)
         {
-            var cart = HttpContext.Session.GetString("cart");
-            CartDict = (string.IsNullOrEmpty(cart)
-                ? new Dictionary<int, int>()
-                : JsonConvert.DeserializeObject<Dictionary<int, int>>(cart))!;
-            HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(CartDict));
-            //initialize the list of products
-            Products = new List<Product>();
-            //loop through the cart items and add the products to the list
-            foreach (var item in CartDict)
+            Products.Add(product);
+        }
+    }
+
+    int totalItems = 0;
+    float totalCost = 0;
+    //loop through the cart dictionary and calculate the total items and cost
+    foreach (var item in CartDict)
+    {
+        var product = Products.FirstOrDefault(p => p.ProductID == item.Key);
+        if (product != null)
+        {
+            // Check if there is enough stock
+            if (product.Stock < item.Value)
             {
-                var product = await _context.Product.FindAsync(item.Key);
-                if (product != null)
+                // Not enough stock, redirect to error page
+                return RedirectToPage("/Error", new { error = "Not enough stock" });
+            }
+            totalItems += item.Value;
+            totalCost += item.Value * product.Price;
+        }
+    }
+    TotalItems = totalItems;
+    TotalCost = totalCost;
+
+    //initialize the products string
+    foreach (var item in CartDict)
+    {
+        _products += $"{item.Key}-{item.Value},";
+    }
+    //remove the last comma
+    _products = _products.TrimEnd(',');
+    //connection string to connect to the database
+    string connectionString = "Server=localhost,3306;User ID=root;Password=admin;Database=main;";
+    var user = HttpContext.Session.GetString("User");
+    if (user != null)
+    {
+        //deserialize the user from the session
+        CurrentUser = JsonConvert.DeserializeObject<User>(user);
+        HttpContext.Session.SetString("User", JsonConvert.SerializeObject(CurrentUser));
+
+    }
+
+    //check if the user is logged in and the products list is not empty
+    if (CurrentUser != null && _products != null)
+    {
+        using (MySqlConnection connection = new MySqlConnection(connectionString))
+        {
+            connection.Open();
+            if (connection.State == ConnectionState.Open)
+            {
+                //insert the order into the database using SQL query
+                string currentDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                string sqlStatement =
+                    $"INSERT INTO `Order` (UserID, Products, TotalPrice, Date, Status) VALUES ('{CurrentUser.UserID}', '{_products}', '{TotalCost}', '{currentDate}', 'Pending')";
+                using (MySqlCommand command = new MySqlCommand(sqlStatement, connection))
                 {
-                    Products.Add(product);
+                    command.ExecuteNonQuery();
                 }
-            }
 
-            int totalItems = 0;
-            float totalCost = 0;
-            //loop through the cart dictionary and calculate the total items and cost
-            foreach (var item in CartDict)
-            {
-                var product = Products.FirstOrDefault(p => p.ProductID == item.Key);
-                if (product != null)
+                //loop through the cart dictionary and calculate the total items and cost
+                foreach (var item in CartDict)
                 {
-                    totalItems += item.Value;
-                    totalCost += item.Value * product.Price;
-                }
-            }
-
-            TotalItems = totalItems;
-            TotalCost = totalCost;
-
-            //initialize the products string
-            foreach (var item in CartDict)
-            {
-                _products += $"{item.Key}-{item.Value},";
-            }
-            //remove the last comma
-            _products = _products.TrimEnd(',');
-            //connection string to connect to the database
-            string connectionString = "Server=localhost,3306;User ID=root;Password=admin;Database=main;";
-            //get the max user id
-            await GetMaxUserIdAsync();
-            var user = HttpContext.Session.GetString("User");
-            if (user != null)
-            {
-                //deserialize the user from the session
-                CurrentUser = JsonConvert.DeserializeObject<User>(user);
-                HttpContext.Session.SetString("User", JsonConvert.SerializeObject(CurrentUser));
-
-            }
-
-            //check if the user is logged in and the products list is not empty
-            if (CurrentUser != null && _products != null)
-            {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-                    if (connection.State == ConnectionState.Open)
+                    var product = Products.FirstOrDefault(p => p.ProductID == item.Key);
+                    if (product != null)
                     {
-                        //insert the order into the database using SQL query
-                        string currentDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                        string sqlStatement =
-                            $"INSERT INTO `Order` (OrderID, UserID, Products, TotalPrice, Date, Status) VALUES ({_max + 1}, '{CurrentUser.UserID}', '{_products}', '{TotalCost}', '{currentDate}', 'Pending')";
-                        using (MySqlCommand command = new MySqlCommand(sqlStatement, connection))
+                        totalItems += item.Value;
+                        totalCost += item.Value * product.Price;
+
+                        // decrease the stock of the product using SQL query
+                        string sqlStatement2 =
+                            $"UPDATE Product SET Stock = Stock - {item.Value} WHERE ProductID = {item.Key}";
+                        // execute the SQL command
+                        using (MySqlCommand command = new MySqlCommand(sqlStatement2, connection))
                         {
                             command.ExecuteNonQuery();
                         }
-
-                        //loop through the cart dictionary and calculate the total items and cost
-                        foreach (var item in CartDict)
-                        {
-                            var product = Products.FirstOrDefault(p => p.ProductID == item.Key);
-                            if (product != null)
-                            {
-                                totalItems += item.Value;
-                                totalCost += item.Value * product.Price;
-
-                                // decrease the stock of the product using SQL query
-                                string sqlStatement2 =
-                                    $"UPDATE Product SET Stock = Stock - {item.Value} WHERE ProductID = {item.Key}";
-                                // execute the SQL command
-                                using (MySqlCommand command = new MySqlCommand(sqlStatement2, connection))
-                                {
-                                    command.ExecuteNonQuery();
-                                }
-                            }
-                        }
                     }
-
-                    //clear the cart
-                    HttpContext.Session.Remove("cart");
-                    return RedirectToPage("/Orders");
                 }
-
-                return null;
             }
-            return null;
+
+            //clear the cart
+            HttpContext.Session.Remove("cart");
+            return RedirectToPage("/Orders");
         }
+
+        return null;
+    }
+    return null;
+}
     }
 }

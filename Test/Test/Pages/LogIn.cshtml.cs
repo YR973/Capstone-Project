@@ -30,20 +30,24 @@ namespace Test.Pages
 
         public async Task<IActionResult> OnPostAsync(string email, string password)
         {
+            if (email== null || password == null)
+            {
+                return RedirectToPage("/LogIn");
+            }
+            
+            // Hash the password
+            string hashedPassword = Account.HashPassword(password);
+
             // for debugging
             Console.Write("email: " + email);
             //query the database for the user
-            var user = await _context.User.FirstOrDefaultAsync(u => u.Email == email.Trim() && u.Password == password);
+            var user = await _context.User.FirstOrDefaultAsync(u => u.Email == email.Trim() && u.Password == hashedPassword);
             // if the user is found, store the user in the session and redirect to the index page
             if (user != null)
             {
                 HttpContext.Session.SetString("User", JsonConvert.SerializeObject(user));
-                //for debugging
-                Console.Write("SUCCESS");
                 return RedirectToPage("/Account");
             }
-            //for debugging
-            Console.Write("FAILURE");
             //if user not found
             return Page();
         }

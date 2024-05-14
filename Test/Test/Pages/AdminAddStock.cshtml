@@ -1,0 +1,64 @@
+﻿@page
+@model Test.Pages.AdminAddStock
+
+@{
+    Layout = "Shared/AdminHeader";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<main>
+    <div class="main-content">
+        <div class="sidebar">
+            <h3>Menu</h3>
+            <ul>
+                <li><a asp-page="/AdminOrders">Order</a></li>
+                <li><a asp-page="/AdminViewUsers">Users</a></li>
+                <li><a asp-page="#" class="active">Add Stock</a></li>
+                <li><a asp-page="/AdminAddItem">Add Item</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <h3>Add Stock</h3>
+            <div class="content-detail">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Current Stock</th>
+                        <th>Add Stock</th>
+                        
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var product in Model.Product)
+                    {
+                        <tr>
+                            <td>@product.ProductID</td>
+                            <td>@product.Name</td>
+                            <td>@product.Stock</td>
+                            <td>
+                                <form method="post" asp-page-handler="OnPost">
+                                    <input type="hidden" name="productId" value="@product.ProductID" />
+                                    <input type="number" name="quantity" min="0" />
+                                    <input type="submit" value="Add Stock" />
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</main> <!-- Main Area -->
+
+</body>
+</html>

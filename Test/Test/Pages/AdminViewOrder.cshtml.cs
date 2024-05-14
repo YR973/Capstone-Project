@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Identity.Client.Extensibility;
 using Test.Models;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 
 
 namespace Test.Pages
@@ -48,23 +50,27 @@ namespace Test.Pages
         
         public void SetAsDelivered(int order)
         {
-            // Create a connection to the database
-            string connectionString = "Server=localhost,3306;User ID=root;Password=admin;Database=main;";
-            // Create the SQL to update the order status
-            string updateOrderStatusSql = $"UPDATE `order` SET Status = 'Delivered' WHERE OrderID = @order";
-            // Create a connection to the database
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            if (order != null)
             {
-                // Create a command to update the order status
-                using (MySqlCommand command = new MySqlCommand(updateOrderStatusSql, connection))
+                // Create a connection to the database
+                string connectionString = "Server=localhost,3306;User ID=root;Password=admin;Database=main;";
+                // Create the SQL to update the order status
+                string updateOrderStatusSql = $"UPDATE `order` SET Status = 'Delivered' WHERE OrderID = @order";
+                // Create a connection to the database
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    // Add the order parameter to the command
-                    command.Parameters.AddWithValue("@order", order);
-                    // Open the connection and execute the command
-                    connection.Open();
-                    command.ExecuteNonQuery();
+                    // Create a command to update the order status
+                    using (MySqlCommand command = new MySqlCommand(updateOrderStatusSql, connection))
+                    {
+                        // Add the order parameter to the command
+                        command.Parameters.AddWithValue("@order", order);
+                        // Open the connection and execute the command
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
                 }
             }
+            
         }
 
         public async Task OnGetAsync(int id)
@@ -74,6 +80,12 @@ namespace Test.Pages
             {
                 Response.Redirect("/Login");
             }
+            User current = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("User"));
+            if (!current.Admin)
+            {
+                Response.Redirect("/Index");
+            }
+            
             // Get the order from the database
             order = _orderContext.Order.Find(id);
             // Check if the order is not found

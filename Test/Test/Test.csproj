@@ -23,4 +23,8 @@
       <PackageReference Include="pythonnet" Version="3.0.3" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Controllers\" />
+    </ItemGroup>
+
 </Project>

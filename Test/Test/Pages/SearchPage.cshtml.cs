@@ -21,6 +21,10 @@ namespace Test.Pages
         
         public async Task<IActionResult> OnGetAsync(string query)
         {
+            if (query==null)
+            {
+                return Redirect("/Index");
+            }
             var list = PythonClass.RunScript(query);
             var ids = list.Select(id => int.Parse(id)).ToList();
             Products = await _context.Product.Where(m => ids.Contains(m.ProductID)).ToListAsync<Product>();

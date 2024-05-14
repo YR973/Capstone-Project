@@ -23,7 +23,7 @@ namespace Test.Pages
         public async Task OnGetAsync()
         {
             //get the first 8 products
-            Products = await _context.Product.Take(8).ToListAsync();
+            Products = await _context.Product.Take(9).ToListAsync();
         }
 
     }
