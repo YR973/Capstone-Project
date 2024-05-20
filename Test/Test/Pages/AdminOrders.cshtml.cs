@@ -9,27 +9,20 @@ namespace Test.Pages
 
     public class AdminOrders : PageModel
     {
-        //private readonly Test.Data.TestContext _context;
         private readonly OrderContext _context;
         private readonly UserContext _user;
-
-        //public AdminOrders(Test.Data.TestContext context)
+        public List<Order> Orders { get; set; }
+        public Dictionary<Order, string> OrderDictionary { get; set; }
+        public User user { get; set; }
+        public User tempUser { get; set; }
+        
         public AdminOrders(OrderContext context, UserContext UserContext)
         {
             _context = context;
             _user = UserContext;
         }
-
         
-        public List<Order> Orders { get; set; }
-        public Dictionary<Order, string> OrderDictionary { get; set; }
-
-        
-        public User user { get; set; }
-        public User quser { get; set; }
-
-        
-        public async Task<IActionResult> OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
             //check if user is logged in
             if (HttpContext.Session.GetString("User") == null)
@@ -51,10 +44,10 @@ namespace Test.Pages
             //get user for each order
             foreach (var o in Orders)
             {
-                quser = await _user.User.FirstOrDefaultAsync(m => m.UserID == o.UserId);
-                if (quser != null)
+                tempUser = await _user.User.FirstOrDefaultAsync(m => m.UserID == o.UserId);
+                if (tempUser != null)
                 {
-                    OrderDictionary.Add(o, quser.Username);
+                    OrderDictionary.Add(o, tempUser.Username);
                 }
                
             }

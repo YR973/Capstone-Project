@@ -1,0 +1,53 @@
+﻿@page
+@model Test.Pages.AdminAddItem
+
+@{
+    Layout = "Shared/AdminHeader";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+    <div class="main-content">
+    			<div class="sidebar">
+    				<h3>Menu</h3>
+    				<ul>
+    					<li><a asp-page="/AdminOrders">Order</a></li>
+    					<li><a asp-page="/AdminViewUsers">Users</a></li>
+					    <li><a asp-page="/AdminAddStock">Add Stock</a></li>
+					    <li><a asp-page="#" class="active">Add Item</a></li>
+					    
+    				</ul>
+    			</div>
+    		<div class="content">
+    			<h3>Users</h3>
+    			<div class="content-detail">
+    				<form method="post" enctype="multipart/form-data">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required />
+                    
+                        <label for="description">Description:</label>
+                        <textarea id="description" name="description" required></textarea>
+                    
+                        <label for="price">Price:</label>
+                        <input type="number" id="price" name="price" min="0" step="0.01" required />
+                    
+                        <label for="stock">Stock:</label>
+                        <input type="number" id="stock" name="stock" min="0" required />
+                    
+                        <label for="image">Image:</label>
+                        <input type="file" id="image" name="image" accept=".png" required />
+                    
+                        <input type="submit" value="Add Item" />
+                    </form>
+    			</div>
+    		</div>
+    	</div>		
+</div>
+</body>
+</html>

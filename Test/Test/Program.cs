@@ -6,7 +6,9 @@ using Test;
 using Python.Runtime;
 
 var builder = WebApplication.CreateBuilder(args);
-Runtime.PythonDLL = @"..\Python311\python311.dll";
+Runtime.PythonDLL = @"C:\inetpub\wwwroot\Python311\python311.dll";
+
+
 
 builder.Services.AddDbContext<ProductContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), 

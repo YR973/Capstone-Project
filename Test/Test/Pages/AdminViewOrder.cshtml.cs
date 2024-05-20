@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Test.Models;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 
 
 namespace Test.Pages
@@ -10,20 +11,13 @@ namespace Test.Pages
     {
         private readonly OrderContext _orderContext;
         private readonly ProductContext _productContext;
-        private readonly UserContext _userContext;
-        private readonly ILogger<IndexModel> _logger;
         public List<Product> Products { get; set; }
-
         public Dictionary<int, int> CartDict { get; set; }
-        
         public Order order { get; set; }
 
-        public AdminViewOrder(ILogger<IndexModel> logger, ProductContext context, UserContext userContext,
-            OrderContext orderContext)
+        public AdminViewOrder(ProductContext context, OrderContext orderContext)
         {
-            _logger = logger;
             _productContext = context;
-            _userContext = userContext;
             _orderContext = orderContext;
         }
         
@@ -48,23 +42,27 @@ namespace Test.Pages
         
         public void SetAsDelivered(int order)
         {
-            // Create a connection to the database
-            string connectionString = "Server=localhost,3306;User ID=root;Password=admin;Database=main;";
-            // Create the SQL to update the order status
-            string updateOrderStatusSql = $"UPDATE `order` SET Status = 'Delivered' WHERE OrderID = @order";
-            // Create a connection to the database
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            if (order != null)
             {
-                // Create a command to update the order status
-                using (MySqlCommand command = new MySqlCommand(updateOrderStatusSql, connection))
+                // Create a connection to the database
+                string connectionString = "Server=localhost,3306;User ID=root;Password=admin;Database=main;";
+                // Create the SQL to update the order status
+                string updateOrderStatusSql = $"UPDATE `order` SET Status = 'Delivered' WHERE OrderID = @order";
+                // Create a connection to the database
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    // Add the order parameter to the command
-                    command.Parameters.AddWithValue("@order", order);
-                    // Open the connection and execute the command
-                    connection.Open();
-                    command.ExecuteNonQuery();
+                    // Create a command to update the order status
+                    using (MySqlCommand command = new MySqlCommand(updateOrderStatusSql, connection))
+                    {
+                        // Add the order parameter to the command
+                        command.Parameters.AddWithValue("@order", order);
+                        // Open the connection and execute the command
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
                 }
             }
+            
         }
 
         public async Task OnGetAsync(int id)
@@ -74,6 +72,12 @@ namespace Test.Pages
             {
                 Response.Redirect("/Login");
             }
+            User current = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("User"));
+            if (!current.Admin)
+            {
+                Response.Redirect("/Index");
+            }
+            
             // Get the order from the database
             order = _orderContext.Order.Find(id);
             // Check if the order is not found
@@ -100,33 +104,29 @@ namespace Test.Pages
         public void OnPost(int oid)
         {
             
-            Console.WriteLine(oid);
             // Set the order as delivered
             SetAsDelivered(oid);
-            Console.WriteLine("Here");
             // Get the order from the database
             order =  _orderContext.Order.Find(oid);
-            if (order == null)
+            if (order != null)
             {
-                Console.WriteLine("Here is null");
-                // Handle the case where the order is not found
-                
-            }
-
-            //initialize the list of products
-            Products = new List<Product>();
-            CartDict = ConvertStringToCartDict(order.Products);
-            //loop through the cart items and add the products to the list
-            foreach (var item in CartDict)
-            {
-                // Get the product from the database
-                var product =  _productContext.Product.Find(item.Key);
-                if (product != null)
+                //initialize the list of products
+                Products = new List<Product>();
+                CartDict = ConvertStringToCartDict(order.Products);
+                //loop through the cart items and add the products to the list
+                foreach (var item in CartDict)
                 {
-                    // Add the product to the list
-                    Products.Add(product);
+                    // Get the product from the database
+                    var product =  _productContext.Product.Find(item.Key);
+                    if (product != null)
+                    {
+                        // Add the product to the list
+                        Products.Add(product);
+                    }
                 }
             }
+
+            
             
             
         }

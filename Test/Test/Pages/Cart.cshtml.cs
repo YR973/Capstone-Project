@@ -7,22 +7,19 @@ namespace Test.Pages
 {
     public class Cart : PageModel
     {
-        
-        private readonly ILogger<IndexModel> _logger;
+        //private readonly ILogger<IndexModel> _logger;
         private readonly ProductContext _context;
-    
-        public Cart(ILogger<IndexModel> logger, ProductContext context)
+        //list to store the products in the cart
+        public List<Product> Products { get; set; }
+        //dictionary to store the cart items
+        public Dictionary<int, int> CartDict { get; set; }
+        
+        public Cart(ProductContext context)
         {
-            _logger = logger;
+            //_logger = logger;
             _context = context;
         }
         
-        //list to store the products in the cart
-        public List<Product> Products { get; set; }
-        
-        //dictionary to store the cart items
-        public Dictionary<int, int> CartDict { get; set; }
-
         public async Task OnGetAsync()
         {
             //get the cart from the session

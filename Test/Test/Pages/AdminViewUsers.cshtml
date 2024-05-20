@@ -19,6 +19,8 @@
 				<ul>
 					<li><a asp-page="/AdminOrders">Order</a></li>
 					<li><a asp-page="/AdminViewUsers" class="active">Users</a></li>
+					<li><a asp-page="/AdminAddStock">Add Stock</a></li>
+					<li><a asp-page="/AdminAddItem">Add Item</a></li>
 				</ul>
 			</div>
 		<div class="content">
@@ -46,7 +48,13 @@
 							<td>@o.Email</td>
 							<td>@o.PhoneNumber</td>
 							<td>@o.Address</td>
-							<td>@o.Admin</td>
+						<td>@o.Admin</td>
+						<td>
+                                <form method="post" asp-page-handler="ToggleAdminStatus">
+                                    <input type="hidden" name="userId" value="@o.UserID" />
+                                    <input type="submit" value="Toggle Admin Status" />
+                                </form>
+                            </td>
 					</tr>
 					}
 					</tbody>

@@ -11,40 +11,9 @@ namespace Test.Pages
 
     public class Checkout : PageModel
     {
-
-        private readonly ILogger<IndexModel> _logger;
         private readonly ProductContext _context;
-        private readonly UserContext _userContext;
-        private readonly OrderContext _orderContext;
-
-        public Checkout(ILogger<IndexModel> logger, ProductContext context, UserContext userContext,
-            OrderContext orderContext)
-        {
-            _logger = logger;
-            _context = context;
-            _userContext = userContext;
-            _orderContext = orderContext;
-        }
-
-
         //list of products
         public List<Product> Products { get; set; }
-        int _max = 0;
-
-        //get the max user id from the database
-        public async Task GetMaxUserIdAsync()
-        {
-            if (await _orderContext.Order.AnyAsync())
-            {
-                int maxId = await _orderContext.Order.MaxAsync<Order, int>(u => u.OrderId);
-                _max = maxId;
-            }
-            else
-            {
-                _max = 0;
-            }
-        }
-
         //dictionary to store the cart items
         public Dictionary<int, int> CartDict { get; set; }
         //user object to store the current user
@@ -55,7 +24,12 @@ namespace Test.Pages
         public int TotalItems { get; set; }
         //total items and cost
         public float TotalCost { get; set; }
-
+        
+        public Checkout(ProductContext context)
+        {
+            _context = context;
+        }
+        
         public async Task<IActionResult> OnGetAsync()
         {
             //get the cart from the session
@@ -64,7 +38,6 @@ namespace Test.Pages
             var user = HttpContext.Session.GetString("User");
             if (cart == null || user == null)
             {
-
                 Console.WriteLine("No user or cart");
                 return RedirectToPage("/Cart");
             }
@@ -79,7 +52,6 @@ namespace Test.Pages
                 : JsonConvert.DeserializeObject<Dictionary<int, int>>(cart))!;
             //store the cart in the session
             HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(CartDict));
-
             //initialize the list of products
             Products = new List<Product>();
             //loop through the cart items and add the products to the list
@@ -91,7 +63,6 @@ namespace Test.Pages
                     Products.Add(product);
                 }
             }
-
             int totalItems = 0;
             float totalCost = 0;
             //loop through the cart dictionary and calculate the total items and cost
@@ -104,21 +75,17 @@ namespace Test.Pages
                     totalCost += item.Value * product.Price;
                 }
             }
-
             TotalItems = totalItems;
             TotalCost = totalCost;
-
             //initialize the products string
             foreach (var item in CartDict)
             {
                 _products += $"{item.Key}-{item.Value},";
             }
-
             //remove the last comma
             _products = _products.TrimEnd(',');
             return null;
         }
-
         public async Task<IActionResult> OnPostAsync()
         {
             var cart = HttpContext.Session.GetString("cart");
@@ -146,11 +113,16 @@ namespace Test.Pages
                 var product = Products.FirstOrDefault(p => p.ProductID == item.Key);
                 if (product != null)
                 {
+                    // Check if there is enough stock
+                    if (product.Stock < item.Value)
+                    {
+                        // Not enough stock, redirect to error page
+                        return RedirectToPage("/Error", new { error = "Not enough stock" });
+                    }
                     totalItems += item.Value;
                     totalCost += item.Value * product.Price;
                 }
             }
-
             TotalItems = totalItems;
             TotalCost = totalCost;
 
@@ -163,8 +135,6 @@ namespace Test.Pages
             _products = _products.TrimEnd(',');
             //connection string to connect to the database
             string connectionString = "Server=localhost,3306;User ID=root;Password=admin;Database=main;";
-            //get the max user id
-            await GetMaxUserIdAsync();
             var user = HttpContext.Session.GetString("User");
             if (user != null)
             {
@@ -174,7 +144,7 @@ namespace Test.Pages
 
             }
 
-            //check if the user is logged in and the products list is not empty
+            //check if the user is logged in and products list is not empty
             if (CurrentUser != null && _products != null)
             {
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -185,12 +155,11 @@ namespace Test.Pages
                         //insert the order into the database using SQL query
                         string currentDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                         string sqlStatement =
-                            $"INSERT INTO `Order` (OrderID, UserID, Products, TotalPrice, Date, Status) VALUES ({_max + 1}, '{CurrentUser.UserID}', '{_products}', '{TotalCost}', '{currentDate}', 'Pending')";
+                            $"INSERT INTO `Order` (UserID, Products, TotalPrice, Date, Status) VALUES ('{CurrentUser.UserID}', '{_products}', '{TotalCost}', '{currentDate}', 'Pending')";
                         using (MySqlCommand command = new MySqlCommand(sqlStatement, connection))
                         {
                             command.ExecuteNonQuery();
                         }
-
                         //loop through the cart dictionary and calculate the total items and cost
                         foreach (var item in CartDict)
                         {
@@ -199,7 +168,6 @@ namespace Test.Pages
                             {
                                 totalItems += item.Value;
                                 totalCost += item.Value * product.Price;
-
                                 // decrease the stock of the product using SQL query
                                 string sqlStatement2 =
                                     $"UPDATE Product SET Stock = Stock - {item.Value} WHERE ProductID = {item.Key}";
@@ -216,8 +184,6 @@ namespace Test.Pages
                     HttpContext.Session.Remove("cart");
                     return RedirectToPage("/Orders");
                 }
-
-                return null;
             }
             return null;
         }

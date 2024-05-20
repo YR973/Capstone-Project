@@ -302,13 +302,13 @@ main .new-product-section .product-section-heading h3{
 main .product-content{
 	margin-top: 40px;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 25px;
 	grid-row-gap: 40px;
-	padding-left: 40px;
+	/*padding-left: 40px;*/
 }
 main .product-content .product img{
-	width: 100%;
+	width: 220px;
 	height: 220px;
 	object-fit: cover;
 	margin-bottom: 10px;
@@ -647,6 +647,7 @@ main .product-long-description p{
 main .new-product-section.shop{
 	margin-top: 20px !important;
 	display: flex;
+	justify-content: space-around;
 }
 main .new-product-section.shop .sidebar{
 	width: 23%;
@@ -1243,4 +1244,10 @@ button:hover {
 
 .suggestion:hover {
 	background-color:#f0f0f0;
+}
+.product {
+	width: fit-content;
+}
+.product-section-heading {
+	padding-right: 70px;
 }
