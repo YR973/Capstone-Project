@@ -2,24 +2,19 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using Test;
 using Test.Models;
 
 namespace Test.Pages
 {
-
-
     public class AdminAddStock : PageModel
     {
         private readonly ProductContext _context;
-
+        public IList<Product> Product { get; set; }
         public AdminAddStock(ProductContext context)
         {
             _context = context;
         }
-
-        public IList<Product> Product { get; set; }
-
+        
         public async Task<IActionResult> OnGetAsync()
         {
             if (HttpContext.Session.GetString("User")==null)
@@ -43,7 +38,6 @@ namespace Test.Pages
                 product.Stock += quantity;
                 await _context.SaveChangesAsync();
             }
-
             return RedirectToPage("/AdminAddStock");
         }
     }

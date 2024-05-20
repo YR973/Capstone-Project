@@ -14,7 +14,7 @@ public class AdminAddItem : PageModel
         _context = context;
     }
 
-    public async Task<IActionResult> OnGet()
+    public async Task<IActionResult> OnGetAsync()
     {
         if (HttpContext.Session.GetString("User")==null)
         {
@@ -25,7 +25,6 @@ public class AdminAddItem : PageModel
         {
             return RedirectToPage("/Index");
         }
-
         return null;
     }
     public async Task<IActionResult> OnPostAsync(string name, string description, float price, int stock, IFormFile image)
@@ -51,8 +50,7 @@ public class AdminAddItem : PageModel
         // Get the ID of the new product and use it to create a unique name for the image file
         var uniqueFileName = product.ProductID + ".png";
         // Create a path to the directory where you want to save the image
-        var imagesDirectory = Path.Combine("C:\\Users\\yfroo\\Documents\\GitHub\\hello\\Capstone-Project\\Test\\Test\\wwwroot\\img\\img\\product", uniqueFileName);
-
+        var imagesDirectory = Path.Combine("C:\\inetpub\\wwwroot\\Test\\wwwroot\\img\\img\\product", uniqueFileName);
         // Save the image to the specified path
         using (var fileStream = new FileStream(imagesDirectory, FileMode.Create))
         {
@@ -60,6 +58,5 @@ public class AdminAddItem : PageModel
         }
         PythonClass.AddItem(product.Name, product.Description, product.ProductID);
         return RedirectToPage("/AdminAddItem");
-        
     }
 }

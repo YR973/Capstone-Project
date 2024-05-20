@@ -3,25 +3,17 @@ using Test.Models;
 
 namespace Test.Pages
 {
-
     public class ViewOrderDetails : PageModel
     {
         private readonly OrderContext _orderContext;
         private readonly ProductContext _productContext;
-        private readonly UserContext _userContext;
-        private readonly ILogger<IndexModel> _logger;
         public List<Product> Products { get; set; }
-
         public Dictionary<int, int> CartDict { get; set; }
-        
         public Order order { get; set; }
 
-        public ViewOrderDetails(ILogger<IndexModel> logger, ProductContext context, UserContext userContext,
-            OrderContext orderContext)
+        public ViewOrderDetails(ProductContext context, OrderContext orderContext)
         {
-            _logger = logger;
             _productContext = context;
-            _userContext = userContext;
             _orderContext = orderContext;
         }
         
@@ -29,7 +21,6 @@ namespace Test.Pages
         {
             Dictionary<int, int> cartDict = new Dictionary<int, int>();
             string[] pairs = products.Split(',');
-
             foreach (string pair in pairs)
             {
                 string[] parts = pair.Split('-');
@@ -37,7 +28,6 @@ namespace Test.Pages
                 int quantity = int.Parse(parts[1]);
                 cartDict[productId] = quantity;
             }
-
             return cartDict;
         }
 

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Identity.Client.Extensibility;
 using Test.Models;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
@@ -12,20 +11,13 @@ namespace Test.Pages
     {
         private readonly OrderContext _orderContext;
         private readonly ProductContext _productContext;
-        private readonly UserContext _userContext;
-        private readonly ILogger<IndexModel> _logger;
         public List<Product> Products { get; set; }
-
         public Dictionary<int, int> CartDict { get; set; }
-        
         public Order order { get; set; }
 
-        public AdminViewOrder(ILogger<IndexModel> logger, ProductContext context, UserContext userContext,
-            OrderContext orderContext)
+        public AdminViewOrder(ProductContext context, OrderContext orderContext)
         {
-            _logger = logger;
             _productContext = context;
-            _userContext = userContext;
             _orderContext = orderContext;
         }
         
@@ -112,33 +104,29 @@ namespace Test.Pages
         public void OnPost(int oid)
         {
             
-            Console.WriteLine(oid);
             // Set the order as delivered
             SetAsDelivered(oid);
-            Console.WriteLine("Here");
             // Get the order from the database
             order =  _orderContext.Order.Find(oid);
-            if (order == null)
+            if (order != null)
             {
-                Console.WriteLine("Here is null");
-                // Handle the case where the order is not found
-                
-            }
-
-            //initialize the list of products
-            Products = new List<Product>();
-            CartDict = ConvertStringToCartDict(order.Products);
-            //loop through the cart items and add the products to the list
-            foreach (var item in CartDict)
-            {
-                // Get the product from the database
-                var product =  _productContext.Product.Find(item.Key);
-                if (product != null)
+                //initialize the list of products
+                Products = new List<Product>();
+                CartDict = ConvertStringToCartDict(order.Products);
+                //loop through the cart items and add the products to the list
+                foreach (var item in CartDict)
                 {
-                    // Add the product to the list
-                    Products.Add(product);
+                    // Get the product from the database
+                    var product =  _productContext.Product.Find(item.Key);
+                    if (product != null)
+                    {
+                        // Add the product to the list
+                        Products.Add(product);
+                    }
                 }
             }
+
+            
             
             
         }

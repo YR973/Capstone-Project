@@ -374,7 +374,6 @@ C:\Users\yfroo\Documents\GitHub\hello\Capstone-Project\Test\Test\bin\Release\net
 C:\Users\yfroo\Documents\GitHub\hello\Capstone-Project\Test\Test\bin\Release\net7.0\win-x64\hostfxr.dll
 C:\Users\yfroo\Documents\GitHub\hello\Capstone-Project\Test\Test\bin\Release\net7.0\win-x64\hostpolicy.dll
 C:\Users\yfroo\Documents\GitHub\hello\Capstone-Project\Test\Test\bin\Release\net7.0\win-x64\mscordaccore.dll
-C:\Users\yfroo\Documents\GitHub\hello\Capstone-Project\Test\Test\bin\Release\net7.0\win-x64\mscordaccore_amd64_amd64_7.0.1824.16914.dll
 C:\Users\yfroo\Documents\GitHub\hello\Capstone-Project\Test\Test\bin\Release\net7.0\win-x64\mscordbi.dll
 C:\Users\yfroo\Documents\GitHub\hello\Capstone-Project\Test\Test\bin\Release\net7.0\win-x64\mscorrc.dll
 C:\Users\yfroo\Documents\GitHub\hello\Capstone-Project\Test\Test\bin\Release\net7.0\win-x64\msquic.dll
@@ -404,3 +403,4 @@ C:\Users\yfroo\Documents\GitHub\hello\Capstone-Project\Test\Test\obj\Release\net
 C:\Users\yfroo\Documents\GitHub\hello\Capstone-Project\Test\Test\obj\Release\net7.0\win-x64\Test.pdb
 C:\Users\yfroo\Documents\GitHub\hello\Capstone-Project\Test\Test\obj\Release\net7.0\win-x64\Test.genruntimeconfig.cache
 C:\Users\yfroo\Documents\GitHub\hello\Capstone-Project\Test\Test\obj\Release\net7.0\win-x64\ref\Test.dll
+C:\Users\yfroo\Documents\GitHub\hello\Capstone-Project\Test\Test\bin\Release\net7.0\win-x64\mscordaccore_amd64_amd64_7.0.1924.21523.dll

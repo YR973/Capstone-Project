@@ -1,6 +1,4 @@
-﻿using System.Text;
-using System.Text.RegularExpressions;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
@@ -20,15 +18,6 @@ namespace Test.Pages
         {
             _context = context;
         }
-
-        // Get the maximum user id
-        // int max;
-        // public async void GetMaxUserIdAsync()
-        // {
-        //     int maxId = await _context.User.MaxAsync(u => u.UserID);
-        //     max = maxId;
-        // }
-        
         
         public async Task<IActionResult> OnGetasync()
         {
@@ -36,7 +25,6 @@ namespace Test.Pages
             {
                 return Redirect("/Account");
             }
-            //GetMaxUserIdAsync();
             return null;
         }
 
@@ -49,24 +37,6 @@ namespace Test.Pages
             }
             // Hash the password
             string hashedPassword = Account.HashPassword(password);
-
-            // Validate the data
-            // string emailPattern = @"^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$";
-            // string usernamePattern = @"^[\w-]{3,}$";
-            // string passwordPattern = @"^(?=.*\d).{8,}$";
-            // if (!Regex.IsMatch(username,usernamePattern) == false ||
-            //     !Regex.IsMatch(email,emailPattern) == false ||
-            //     !Regex.IsMatch(hashedPassword,passwordPattern) ==false ||
-            //     string.IsNullOrWhiteSpace(firstname) ||
-            //     string.IsNullOrWhiteSpace(lastname) ||
-            //     string.IsNullOrWhiteSpace(address) ||
-            //     string.IsNullOrWhiteSpace(phonenumber))
-            // {
-            //     //for debugging
-            //     Console.Write("FAILURE");
-            //     return Page();
-            // }
-
             if (EmailExistsAsync(email).Result)
             {
                 Console.Write("E-Mail exists");
@@ -82,7 +52,6 @@ namespace Test.Pages
                     command.ExecuteNonQuery();
                 }
             }
-            
             // Redirect to a success page
             return RedirectToPage("/login");
         }

@@ -25,9 +25,7 @@ namespace Test.Pages
 
             return null;
         }
-       
-       
-
+        
         public async Task<IActionResult> OnPostAsync(string email, string password)
         {
             if (email== null || password == null)
@@ -37,9 +35,7 @@ namespace Test.Pages
             
             // Hash the password
             string hashedPassword = Account.HashPassword(password);
-
-            // for debugging
-            Console.Write("email: " + email);
+            
             //query the database for the user
             var user = await _context.User.FirstOrDefaultAsync(u => u.Email == email.Trim() && u.Password == hashedPassword);
             // if the user is found, store the user in the session and redirect to the index page

@@ -5,7 +5,6 @@ using Test.Models;
 
 namespace Test.Pages
 {
-
     public class AdminViewUsers : PageModel
     {
         private readonly UserContext _context;
@@ -32,6 +31,16 @@ namespace Test.Pages
             // Get all users from the database
             Users = _context.User.ToList();
             return null;
+        }
+        public async Task<IActionResult> OnPostToggleAdminStatusAsync(int userId)
+        {
+            var user = await _context.User.FindAsync(userId);
+            if (user != null)
+            {
+                user.Admin = !user.Admin;
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToPage("/AdminViewUsers");
         }
     }
 }

@@ -317,7 +317,7 @@ C:\Users\yfroo\Desktop\Test\createdump.exe
 C:\Users\yfroo\Desktop\Test\hostfxr.dll
 C:\Users\yfroo\Desktop\Test\hostpolicy.dll
 C:\Users\yfroo\Desktop\Test\mscordaccore.dll
-C:\Users\yfroo\Desktop\Test\mscordaccore_amd64_amd64_7.0.1824.16914.dll
+C:\Users\yfroo\Desktop\Test\mscordaccore_amd64_amd64_7.0.1924.21523.dll
 C:\Users\yfroo\Desktop\Test\mscordbi.dll
 C:\Users\yfroo\Desktop\Test\mscorrc.dll
 C:\Users\yfroo\Desktop\Test\msquic.dll

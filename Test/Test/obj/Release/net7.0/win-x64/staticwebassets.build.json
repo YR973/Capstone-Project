@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "TMB5eSf+uWg8jWw1JLt9cpuzHabv3wx+xHIroH0pjrc=",
+  "Hash": "Mf4HgOaC/U8b0qLp76gOYEnv3AaB91/bo4VH6qH1snc=",
   "Source": "Test",
   "BasePath": "_content/Test",
   "Mode": "Default",
@@ -1326,6 +1326,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\img\\product\\126.png"
+    },
+    {
+      "Identity": "C:\\Users\\yfroo\\Documents\\GitHub\\hello\\Capstone-Project\\Test\\Test\\wwwroot\\img\\img\\product\\127.png",
+      "SourceId": "Test",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\yfroo\\Documents\\GitHub\\hello\\Capstone-Project\\Test\\Test\\wwwroot\\",
+      "BasePath": "_content/Test",
+      "RelativePath": "img/img/product/127.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\img\\product\\127.png"
     },
     {
       "Identity": "C:\\Users\\yfroo\\Documents\\GitHub\\hello\\Capstone-Project\\Test\\Test\\wwwroot\\img\\img\\product\\13.png",
